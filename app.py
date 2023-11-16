@@ -5,6 +5,7 @@ import requests
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
+from functools import wraps
 import google.auth.transport.requests
 
 from flask import Flask, abort, render_template, redirect, url_for, session, request, jsonify
@@ -27,11 +28,12 @@ flow = Flow.from_client_secrets_file(
 
 
 def login_is_required(function):
+    @wraps(function)
     def wrapper(*args, **kwargs):
         if 'google_id' not in session:
             return abort(401)  # Authorization required
         else:
-            return function()  # Forward the arguments to the original function
+            return function(*args, **kwargs)  # Forward the arguments to the original function
     return wrapper
 
 
@@ -62,18 +64,40 @@ def callback():
     session['google_id'] = id_info.get('sub')
     session['name'] = id_info.get('name')
     session['email'] = id_info.get('email')
-    return redirect("/protected_area")
+    return redirect("/dashboard")
     
+
+@app.route('/')
+def index():
+    #return render_template('index.html')
+    return render_template('index.html')
+
+@app.route('/dashboard')
+@login_is_required
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/summary')
+@login_is_required
+def summary():
+    return "Summary Page"
+
+@app.route('/user')
+@login_is_required
+def user():
+    return "user page"
+
+@app.route('/settings')
+@login_is_required
+def settings():
+    return "Settings Page"
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect("/")
 
-@app.route('/')
-def index():
-    #return render_template('index.html')
-    return render_template('index.html')
+
 
 @app.route('/protected_area')
 @login_is_required
