@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 # Ignore checking.html in templates folder
 /templates/checking.html
+/templates/check-table.html
 
 # Local development settings
 instance/
