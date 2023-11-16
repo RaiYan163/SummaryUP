@@ -1,0 +1,114 @@
+<!-- FILEPATH: /d:/SystemProject/SummaryUP/templates/checking.html -->
+<!-- Created by Saugata Roy Arghya-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>SummarUp</title>
+  <style>
+    .navbar {
+      background-color: #fff !important;
+      box-shadow: 0 4px 8px rgba(0,0,0,.5) !important;
+      height: 80px;
+    }
+    .navbar-nav {
+      margin-left: auto;
+    }
+    .navbar-brand {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,.5);
+    }
+    .card-header {
+      background-color: #fff;
+      border-bottom: none;
+    }
+    .card-header button {
+      background-color: transparent;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .card-header button:focus {
+      outline: none;
+      color: #fff;
+      background-color: #007bff;
+    }
+    .card-body {
+      background-color: #f8f9fa;
+    }
+  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SummarUP Logo" width="30" height="24" class="d-inline-block align-text-top">
+        SummarUP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile Picture" width="30" height="30" class="rounded-circle">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    /* existing styles */
+    .card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,.5);
+      height: 600px; /* new property */
+    }
+    /* existing styles */
+  </style>
+  <!-- Animation of the name -->
+  
+
+  <!-- Card -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-center">
+      <button type="button" class="btn btn-transparent active">Summary </button>
+      <button type="button" class="btn btn-transparent">User</button>
+      <button type="button" class="btn btn-transparent">Chat</button>
+      <button type="button" class="btn btn-transparent">Bhule Gesi</button>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Card Title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </div>
+
+ 
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
