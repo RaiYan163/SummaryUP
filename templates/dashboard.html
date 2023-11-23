@@ -124,7 +124,7 @@
       <h4 style="text-align: center;">Hello there,{{Name}}</h4>
       <div class="d-flex justify-content-center mt-4">
         <button type="button" class="btn btn-primary rounded-pill mr-5">Saved Links</button>
-        <button type="button" class="btn btn-primary rounded-pill">Saved Summaries</button>
+        <button type="button" class="btn btn-primary rounded-pill" onclick="saved_summaries()">Saved Summaries</button>
       </div>
       <div class="card-deck" id="myCardDeck">
 
@@ -200,6 +200,9 @@
 
     function dashboard() {
       window.location.href = "{{ url_for('dashboard')}}"
+    }
+    function saved_summaries(){
+      window.location.href = "{{ url_for('dashboard2')}}"
     }
     function summary() {
       window.location.href = "{{ url_for('summary')}}"

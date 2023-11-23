@@ -123,7 +123,7 @@
 
       <h4 style="text-align: center;">Hello there,{{Name}}</h4>
       <div class="d-flex justify-content-center mt-4">
-        <button type="button" class="btn btn-primary rounded-pill mr-5">Saved Links</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-5" onclick="saved_links()">Saved Links</button>
         <button type="button" class="btn btn-primary rounded-pill">Saved Summaries</button>
       </div>
       <!-- Table -->
@@ -229,6 +229,9 @@
   <script>
 
     function dashboard() {
+      window.location.href = "{{ url_for('dashboard')}}"
+    }
+    function saved_links() {
       window.location.href = "{{ url_for('dashboard')}}"
     }
     function summary() {

@@ -77,6 +77,11 @@ def index():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/dashboard2')
+@login_is_required
+def dashboard2():
+    return render_template('dashboard_saved_summaries.html')
+
 @app.route('/summary')
 @login_is_required
 def summary():
@@ -90,7 +95,7 @@ def user():
 @app.route('/settings')
 @login_is_required
 def settings():
-    return "Settings Page"
+    return render_template('settings.html')
 
 @app.route('/logout')
 def logout():
