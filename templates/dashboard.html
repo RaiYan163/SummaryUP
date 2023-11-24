@@ -119,67 +119,76 @@
     </div>
 
     <!-- Testing purpose only. Nothing is final-->
-    <div class="card-body">
 
-      <h4 style="text-align: center;">Hello there,{{Name}}</h4>
-      <div class="d-flex justify-content-center mt-4">
-        <button type="button" class="btn btn-primary rounded-pill mr-5">Saved Links</button>
-        <button type="button" class="btn btn-primary rounded-pill" onclick="saved_summaries()">Saved Summaries</button>
-      </div>
-      <div class="card-deck" id="myCardDeck">
-
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
+    <!-- Hero Section -->
+    <section class="hero-section mt-5 mb-4 ">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h1 class="hero-heading mb-4">Instant Summaries at Your Fingertips</h1>
+            <p class="hero-text mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id
+              aliquam
+              ultrices, nisl justo consequat nunc, vel tincidunt arcu enim at justo.</p>
+            <a href="#" class="btn btn-primary btn-lg">Try Now</a>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
+          <div class="col-lg-5 mt-5 mt-lg-0 ml-6">
+            <img src="/static/img/hero.png" alt="Background Image" class="img-fluid">
           </div>
         </div>
       </div>
-      <nav aria-label="Card Deck Pagination" style="margin-top: 20px;">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+    </section>
 
+    <!-- Hero Section -->
 
+    <!-- Greeting Card -->
+    <section class="container">
+      <div class="mt-2 mb-4">
+        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+          <h2>Hello there, username!</h2>
+        </div>
+      </div>
+    </section>
+    <!-- End of Greeting Card -->
 
+    <!-- Rest of the code -->
 
+    <!-- Card Section -->
+    <section class="container mb-4">
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h1 class="card-title">1</h1>
+                </div>
+                <div class="col">
+                  <h5 class="card-text">Number of Summaries Saved</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card text-center">
+            <div class="card-body">
+              <h1 class="card-title">2</h1>
+              <h5 class="card-text">Number of Links Saved</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of Number Section -->
+    <!-- Container with button -->
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center py-5">
+        <button class="btn btn-primary btn-lg mt-4 mb-4">Show items</button>
+      </div>
     </div>
+    
+  </div>
   </div>
 
 
@@ -201,7 +210,7 @@
     function dashboard() {
       window.location.href = "{{ url_for('dashboard')}}"
     }
-    function saved_summaries(){
+    function saved_summaries() {
       window.location.href = "{{ url_for('dashboard2')}}"
     }
     function summary() {
