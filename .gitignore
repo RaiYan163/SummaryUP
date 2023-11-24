@@ -19,3 +19,4 @@ instance/
 
 # Dependencies
 venv/
+system_32
