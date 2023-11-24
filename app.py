@@ -85,7 +85,7 @@ def dashboard2():
 @app.route('/summary')
 @login_is_required
 def summary():
-    return "Summary Page"
+    return render_template('summary.html')
 
 @app.route('/user')
 @login_is_required

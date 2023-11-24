@@ -1,0 +1,676 @@
+<!-- FILEPATH: /d:/SystemProject/SummaryUP/templates/checking.html -->
+<!-- Created by Saugata Roy Arghya-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>SummarUp</title>
+  <style>
+    .navbar {
+      background-color: #fff !important;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5) !important;
+      height: 80px;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+    }
+
+    .navbar-brand {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+    }
+
+    .pdf-card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+   }
+
+    .card-header {
+      background-color: #fff;
+      border-bottom: none;
+    }
+
+    .card-header button {
+      background-color: transparent;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .card-header button:focus {
+      outline: none;
+      color: #fff;
+      background-color: #007bff;
+    }
+
+    .card-body {
+      background-color: #f8f9fa;
+    }
+
+    
+  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- jQuery CDN-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SummarUP Logo" width="30" height="24"
+          class="d-inline-block align-text-top">
+        SummarUP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Profile Picture" width="30"
+                height="30" class="rounded-circle">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    /* existing styles */
+    .card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+      /*height: 600px;
+      /* new property */
+    }
+
+    /* existing styles */
+  </style>
+
+<style>
+  .panel-blue {
+    background-color: rgb(184, 184, 246);
+    color: white; /* Set text color to white for better visibility on a blue background */
+    padding: 15px; /* Add padding for content inside the panel */
+    border-radius: 5px; /* Add rounded corners */
+    margin-top: 20px;
+  }
+</style>
+  <!-- Animation of the name -->
+
+  <style>
+    .container-md {
+      
+      color: black; /* Text color */
+      padding: 20px; /* Padding inside the container */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for a subtle lift */
+      text-align: center; /* Center-align text */
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+  </style>
+
+<style>
+  .btn-group-toggle .btn-primary.active {
+      background-color: #007bff; /* Blue color for the active state */
+      color: #fff; /* Text color for the active state */
+  }
+
+  .btn-group-toggle .btn-primary:not(.active) {
+      background-color: #6c757d; /* Grey color for the inactive state */
+      color: #fff; /* Text color for the inactive state */
+  }
+</style>
+
+<style>
+  /* Add this style to set maximum width and height for the textarea */
+  .container-md .form-group.green-border-focus textarea {
+      max-width: 700px; /* Adjust the maximum width as needed */
+      max-height: 800px; /* Adjust the maximum height as needed */
+      overflow: auto; /* Add a scrollbar if content overflows */
+  }
+  .form-group.green-border-focus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%; /* Adjust if necessary */
+}
+
+.form-group.green-border-focus label {
+    margin-bottom: 10px; 
+    font-size: 18px; /* Adjust the font size */
+    font-weight: bold; /* Adjust the font weight */
+    color: #007bff; /* Adjust the text color */
+    margin-bottom: 10px; /* Add some spacing between label and textarea 
+}
+
+.form-group.green-border-focus textarea {
+    max-width: 100%; /* Adjust if necessary */
+}
+</style>
+
+
+  <!-- Card -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-center">
+      <div class="btn-group" role="group" aria-label="Toggle content">
+        <button type="button" class="btn btn-transparent" onclick="dashboard()">Dashboard</button>
+        <button type="button" class="btn btn-transparent" onclick="summary()">Summary</button>
+        <button type="button" class="btn btn-transparent" onclick="settings()">Settings</button>
+        <button type="button" class="btn btn-transparent" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Testing purpose only. Nothing is final-->
+    <div class="card-body">
+
+      <h4 style="text-align: center;">Summarise and Save</h4>
+      <div class="d-flex justify-content-center mt-4">
+        <div class="btn-group">
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumYt">Youtube</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumText">Text</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumSite">Site</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumFile">File</button>
+        </div>
+      </div>
+
+      <div class="my-div" id="youtube">
+
+
+      <div class = "container-md">
+        <form>
+          <div class="row">
+            <div class="col-md-2">
+              <label for="textInput" class="col-form-label">Youtube Link:</label>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <input type="text" class="form-control" id="textInput" name="textInput" placeholder="Enter Youtube URL">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="Transcript" class="btn btn-primary">Transcript</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container-md">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input type="radio" name="options" id="youtubetranscript" autocomplete="off" checked> Transcript
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="options" id="youtubesummary" autocomplete="off"> Summary
+          </label>
+        </div>
+      </div>
+      
+      <div class="container-md">
+        <div class="form-group green-border-focus" id="youtubetranscriptSection">
+          <label for="exampleFormControlTextarea5">Transcript</label>
+          <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+        </div>
+
+        <div class="form-group green-border-focus" id="youtubesummarySection">
+          <label for="exampleFormControlTextarea5">Summary</label>
+          <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+        </div>
+
+      
+        <div class="flex self-center" id="youtubetranscriptBottom">
+          <label for="size">length</label>
+          <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+          <button type="summarize" class="btn btn-primary">Summarize</button>
+        </div>
+
+        <div class="flex self-center" id="youtubesummaryBottom">
+          
+          <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+          <button type="save" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+      
+      </div>
+
+
+      <div class="my-div" id="text" style="display: none;">
+
+        
+
+        <div class = "container-md" style="background-color:#3178eb;">
+          <h4 style="font-weight: bold; color: white;"> Copy The text and paste it in the text area below. </h4>
+        </div>
+  
+        <div class="container-md">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="radio" name="options" id="texttranscript" autocomplete="off" checked> Transcript
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="textsummary" autocomplete="off"> Summary
+            </label>
+          </div>
+        </div>
+        
+        <div class="container-md">
+          <div class="form-group green-border-focus" id="texttranscriptSection">
+            <label for="exampleFormControlTextarea5">Transcript</label>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+          </div>
+  
+          <div class="form-group green-border-focus" id="textsummarySection">
+            <label for="exampleFormControlTextarea5">Summary</label>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+          </div>
+  
+        
+          <div class="flex self-center" id="texttranscriptBottom">
+            <label for="size">length</label>
+            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+            <button type="summarize" class="btn btn-primary">Summarize</button>
+          </div>
+  
+          <div class="flex self-center" id="textsummaryBottom">
+            
+            <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+            <button type="save" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+        
+        </div>
+
+        <div class="my-div" id="site" style="display: none;">
+
+          <div class = "container-md">
+            <form>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="textInput" class="col-form-label"> Enter the link:</label>
+                </div>
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="textInput" name="textInput" placeholder="Enter Youtube URL">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="Transcript" class="btn btn-primary">Transcript</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+  
+          <div class="container-md">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="options" id="sitetranscript" autocomplete="off" checked> Transcript
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="sitesummary" autocomplete="off"> Summary
+              </label>
+            </div>
+          </div>
+          
+          <div class="container-md">
+            <div class="form-group green-border-focus" id="sitetranscriptSection">
+              <label for="exampleFormControlTextarea5">Transcript</label>
+              <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            </div>
+    
+            <div class="form-group green-border-focus" id="sitesummarySection">
+              <label for="exampleFormControlTextarea5">Summary</label>
+              <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            </div>
+    
+          
+            <div class="flex self-center" id="sitetranscriptBottom">
+              <label for="size">length</label>
+              <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+              <button type="summarize" class="btn btn-primary">Summarize</button>
+            </div>
+    
+            <div class="flex self-center" id="sitesummaryBottom">
+              
+              <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+              <button type="save" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+          
+          </div>
+
+          <div class="my-div" id="file" style="display: none;">
+
+           <div class="container-md">
+            <div class = row>
+              <div class="col-md-6">
+               <div class="pdf-card">
+                  <div class="card-body">
+                      <h5 class="card-title">PDF Reader</h5>
+                      <div id="drop-zone" class="drop-zone">
+                          Drag and drop PDF file here
+                      </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+          </div>
+
+            
+            <h3>This is in File Segment.</h3>
+  
+            <div class="container-md">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                  <input type="radio" name="options" id="filetranscript" autocomplete="off" checked> Transcript
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="options" id="filesummary" autocomplete="off"> Summary
+                </label>
+              </div>
+            </div>
+            
+            <div class="container-md">
+              <div class="form-group green-border-focus" id="filetranscriptSection">
+                <label for="exampleFormControlTextarea5">Transcript</label>
+                <textarea class="form-control" id="pdfTextarea" rows="20"></textarea>
+              </div>
+      
+              <div class="form-group green-border-focus" id="filesummarySection">
+                <label for="exampleFormControlTextarea5">Summary</label>
+                <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+              </div>
+      
+            
+              <div class="flex self-center" id="filetranscriptBottom">
+                <label for="size">length</label>
+                <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+                <button type="summarize" class="btn btn-primary">Summarize</button>
+              </div>
+      
+              <div class="flex self-center" id="filesummaryBottom">
+                
+                <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+                <button type="save" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+            
+            </div>
+       
+        
+        
+
+
+      
+
+      </div>
+
+      <div class="container-fluid panel panel-blue">
+        Hello! I am in a fluid width contianer.
+      </div>
+      
+
+
+
+
+    </div>
+  </div>
+
+ 
+
+  
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- JS -->
+  <script>
+
+    function dashboard() {
+      window.location.href = "{{ url_for('dashboard')}}"
+    }
+    function summary() {
+      window.location.href = "{{ url_for('summary')}}"
+    }
+    function settings() {
+      window.location.href = "{{ url_for('settings')}}"
+    }
+    function logout() {
+      window.location.href = "{{ url_for('logout')}}"
+    }
+
+    $(document).ready(function () {
+      var maxCardsToShow = 3; // Change this value to set the maximum number of cards
+
+      // Select the card deck and hide cards beyond the maximum limit
+      var cardDeck = $('#myCardDeck');
+      var cards = cardDeck.find('.card');
+
+      if (cards.length > maxCardsToShow) {
+        cards.slice(maxCardsToShow).hide();
+      }
+    });
+
+
+    /*
+     function showContent(contentId) {
+      document.querySelectorAll('.card-body > div').forEach(div => {
+        div.style.display = 'none';
+      });
+
+      document.getElementById(contentId).style.display = 'block';
+    }
+
+    */
+
+  </script>
+
+<script>
+
+  function initializePage(segmentId) {
+    const transcriptSection = $(`#${segmentId}transcriptSection`);
+    const transcriptBottom = $(`#${segmentId}transcriptBottom`);
+    const summarySection = $(`#${segmentId}summarySection`);
+    const summaryBottom = $(`#${segmentId}summaryBottom`);
+    const transcriptRadio = $(`#${segmentId}transcript`);
+    const summaryRadio = $(`#${segmentId}summary`);
+  
+    transcriptSection.removeClass('d-none');
+    transcriptBottom.removeClass('d-none');
+    summarySection.addClass('d-none');
+    summaryBottom.addClass('d-none');
+    transcriptRadio.prop('checked', true);
+  
+    transcriptRadio.change(function () {
+      console.log('Transcript radio selected');
+      if (this.checked) {
+        transcriptSection.removeClass('d-none');
+        transcriptBottom.removeClass('d-none');
+        summarySection.addClass('d-none');
+        summaryBottom.addClass('d-none');
+      }
+    });
+  
+    summaryRadio.change(function () {
+      console.log('Summary radio selected');
+      if (this.checked) {
+        transcriptSection.addClass('d-none');
+        transcriptBottom.addClass('d-none');
+        summarySection.removeClass('d-none');
+        summaryBottom.removeClass('d-none');
+      }
+    });
+  }
+    
+  $(document).ready(function () {
+      // Initially, show the content for the first button
+      $('#youtube').show();
+      let segmentId = 'youtube';
+      initializePage(segmentId);
+  
+      // Set up click event listeners for all buttons
+      $('#sumYt, #sumText, #sumSite, #sumFile').click(function () {
+        // Hide all divs
+        $('.my-div').hide();
+        
+        // Get the corresponding div ID based on the clicked button
+        const buttonId = $(this).attr('id');
+        switch (buttonId) {
+          case 'sumText':
+            $('#text').show();
+            segmentId = 'text';
+            initializePage(segmentId);
+            break;
+          case 'sumSite':
+            $('#site').show();
+            segmentId = 'site';
+            initializePage(segmentId);
+            break;
+          case 'sumFile':
+            $('#file').show();
+            segmentId = 'file';
+            initializePage(segmentId);
+            break;
+          default:
+            $('#youtube').show();
+            segmentId = 'youtube';
+            initializePage(segmentId);
+            break;
+        }
+      });
+  });
+  </script>
+
+  <!--PDF drag and drop-->
+
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+  <script>
+    document.getElementById('drop-zone').addEventListener('drop', handleDrop, false);
+    document.getElementById('drop-zone').addEventListener('dragover', function (e) {
+        e.preventDefault();
+    }, false);
+
+    function handleDrop(e) {
+        e.preventDefault();
+
+        var file = e.dataTransfer.files[0];
+        if (file.type === 'application/pdf') {
+            readPDF(file);
+        } else {
+            alert('Please drop a valid PDF file.');
+        }
+    }
+
+    function readPDF(file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var arrayBuffer = e.target.result;
+
+            // Use PDF.js to read the contents
+            pdfjsLib.getDocument(arrayBuffer).then(function (pdfDoc) {
+                var text = '';
+                var numPages = pdfDoc.numPages;
+
+                for (var pageNum = 1; pageNum <= numPages; pageNum++) {
+                    pdfDoc.getPage(pageNum).then(function (page) {
+                        return page.getTextContent();
+                    }).then(function (content) {
+                        text += content.items.map(function (item) {
+                            return item.str;
+                        }).join(' ');
+                    }).catch(function (error) {
+                        console.error('Error getting text content:', error);
+                    });
+                }
+
+                document.getElementById('pdfTextarea').value = text;
+            }).catch(function (error) {
+                console.error('Error loading PDF:', error);
+            });
+        };
+
+        reader.readAsArrayBuffer(file);
+    }
+</script>
+
+<!--Not working, delete the previous script-->
+  
+
+
+
+  <footer class="bg-light py-5 mt-5 d-flex">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Company Name</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu fringilla bibendum, elit elit
+            consectetur ipsum, vel luctus sapien magna eu nulla.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Summary</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-map-marker"></i> KUET, Telighati, KHU 1100</li>
+            <li><i class="fa fa-phone"></i> 123456789</li>
+            <li><i class="fa fa-envelope"></i>saugataroyarghya@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+
+
+
+</html>
