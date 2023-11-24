@@ -36,6 +36,13 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
     }
 
+    .pdf-card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+   }
+
     .card-header {
       background-color: #fff;
       border-bottom: none;
@@ -190,13 +197,16 @@
 
       <h4 style="text-align: center;">Summarise and Save</h4>
       <div class="d-flex justify-content-center mt-4">
-        <button type="button" class="btn btn-primary rounded-pill mr-2">Youtube</button>
-        <button type="button" class="btn btn-primary rounded-pill mr-2">Text</button>
-        <button type="button" class="btn btn-primary rounded-pill mr-2">Site</button>
-        <button type="button" class="btn btn-primary rounded-pill mr-2">File</button>
+        <div class="btn-group">
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumYt">Youtube</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumText">Text</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumSite">Site</button>
+        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumFile">File</button>
+        </div>
       </div>
 
-      
+      <div class="my-div" id="youtube">
+
 
       <div class = "container-md">
         <form>
@@ -220,39 +230,205 @@
       <div class="container-md">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-primary active">
-            <input type="radio" name="options" id="transcript" autocomplete="off" checked> Transcript
+            <input type="radio" name="options" id="youtubetranscript" autocomplete="off" checked> Transcript
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="options" id="summary" autocomplete="off"> Summary
+            <input type="radio" name="options" id="youtubesummary" autocomplete="off"> Summary
           </label>
         </div>
       </div>
       
       <div class="container-md">
-        <div class="form-group green-border-focus" id="transcriptSection">
+        <div class="form-group green-border-focus" id="youtubetranscriptSection">
           <label for="exampleFormControlTextarea5">Transcript</label>
           <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
         </div>
 
-        <div class="form-group green-border-focus" id="summarySection">
+        <div class="form-group green-border-focus" id="youtubesummarySection">
           <label for="exampleFormControlTextarea5">Summary</label>
           <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
         </div>
 
       
-        <div class="flex self-center" id="transcriptBottom">
+        <div class="flex self-center" id="youtubetranscriptBottom">
           <label for="size">length</label>
           <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
           <button type="summarize" class="btn btn-primary">Summarize</button>
         </div>
 
-        <div class="flex self-center" id="summaryBottom">
+        <div class="flex self-center" id="youtubesummaryBottom">
           
           <button type="summarize" class="btn btn-primary">Re-Summarize</button>
           <button type="save" class="btn btn-primary">Save</button>
         </div>
       </div>
       
+      </div>
+
+
+      <div class="my-div" id="text" style="display: none;">
+
+        
+
+        <div class = "container-md" style="background-color:#3178eb;">
+          <h4 style="font-weight: bold; color: white;"> Copy The text and paste it in the text area below. </h4>
+        </div>
+  
+        <div class="container-md">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="radio" name="options" id="texttranscript" autocomplete="off" checked> Transcript
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="textsummary" autocomplete="off"> Summary
+            </label>
+          </div>
+        </div>
+        
+        <div class="container-md">
+          <div class="form-group green-border-focus" id="texttranscriptSection">
+            <label for="exampleFormControlTextarea5">Transcript</label>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+          </div>
+  
+          <div class="form-group green-border-focus" id="textsummarySection">
+            <label for="exampleFormControlTextarea5">Summary</label>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+          </div>
+  
+        
+          <div class="flex self-center" id="texttranscriptBottom">
+            <label for="size">length</label>
+            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+            <button type="summarize" class="btn btn-primary">Summarize</button>
+          </div>
+  
+          <div class="flex self-center" id="textsummaryBottom">
+            
+            <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+            <button type="save" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+        
+        </div>
+
+        <div class="my-div" id="site" style="display: none;">
+
+          <div class = "container-md">
+            <form>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="textInput" class="col-form-label"> Enter the link:</label>
+                </div>
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="textInput" name="textInput" placeholder="Enter Youtube URL">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="Transcript" class="btn btn-primary">Transcript</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+  
+          <div class="container-md">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="options" id="sitetranscript" autocomplete="off" checked> Transcript
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="sitesummary" autocomplete="off"> Summary
+              </label>
+            </div>
+          </div>
+          
+          <div class="container-md">
+            <div class="form-group green-border-focus" id="sitetranscriptSection">
+              <label for="exampleFormControlTextarea5">Transcript</label>
+              <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            </div>
+    
+            <div class="form-group green-border-focus" id="sitesummarySection">
+              <label for="exampleFormControlTextarea5">Summary</label>
+              <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            </div>
+    
+          
+            <div class="flex self-center" id="sitetranscriptBottom">
+              <label for="size">length</label>
+              <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+              <button type="summarize" class="btn btn-primary">Summarize</button>
+            </div>
+    
+            <div class="flex self-center" id="sitesummaryBottom">
+              
+              <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+              <button type="save" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+          
+          </div>
+
+          <div class="my-div" id="file" style="display: none;">
+
+           <div class="container-md">
+            <div class = row>
+              <div class="col-md-6">
+               <div class="pdf-card">
+                  <div class="card-body">
+                      <h5 class="card-title">PDF Reader</h5>
+                      <div id="drop-zone" class="drop-zone">
+                          Drag and drop PDF file here
+                      </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+          </div>
+
+            
+            <h3>This is in File Segment.</h3>
+  
+            <div class="container-md">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                  <input type="radio" name="options" id="filetranscript" autocomplete="off" checked> Transcript
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="options" id="filesummary" autocomplete="off"> Summary
+                </label>
+              </div>
+            </div>
+            
+            <div class="container-md">
+              <div class="form-group green-border-focus" id="filetranscriptSection">
+                <label for="exampleFormControlTextarea5">Transcript</label>
+                <textarea class="form-control" id="pdfTextarea" rows="20"></textarea>
+              </div>
+      
+              <div class="form-group green-border-focus" id="filesummarySection">
+                <label for="exampleFormControlTextarea5">Summary</label>
+                <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+              </div>
+      
+            
+              <div class="flex self-center" id="filetranscriptBottom">
+                <label for="size">length</label>
+                <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+                <button type="summarize" class="btn btn-primary">Summarize</button>
+              </div>
+      
+              <div class="flex self-center" id="filesummaryBottom">
+                
+                <button type="summarize" class="btn btn-primary">Re-Summarize</button>
+                <button type="save" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+            
+            </div>
        
         
         
@@ -330,43 +506,139 @@
   </script>
 
 <script>
+
+  function initializePage(segmentId) {
+    const transcriptSection = $(`#${segmentId}transcriptSection`);
+    const transcriptBottom = $(`#${segmentId}transcriptBottom`);
+    const summarySection = $(`#${segmentId}summarySection`);
+    const summaryBottom = $(`#${segmentId}summaryBottom`);
+    const transcriptRadio = $(`#${segmentId}transcript`);
+    const summaryRadio = $(`#${segmentId}summary`);
+  
+    transcriptSection.removeClass('d-none');
+    transcriptBottom.removeClass('d-none');
+    summarySection.addClass('d-none');
+    summaryBottom.addClass('d-none');
+    transcriptRadio.prop('checked', true);
+  
+    transcriptRadio.change(function () {
+      console.log('Transcript radio selected');
+      if (this.checked) {
+        transcriptSection.removeClass('d-none');
+        transcriptBottom.removeClass('d-none');
+        summarySection.addClass('d-none');
+        summaryBottom.addClass('d-none');
+      }
+    });
+  
+    summaryRadio.change(function () {
+      console.log('Summary radio selected');
+      if (this.checked) {
+        transcriptSection.addClass('d-none');
+        transcriptBottom.addClass('d-none');
+        summarySection.removeClass('d-none');
+        summaryBottom.removeClass('d-none');
+      }
+    });
+  }
+    
   $(document).ready(function () {
-      const transcriptSection = $('#transcriptSection');
-      const transcriptBottom = $('#transcriptBottom');
-      const summarySection = $('#summarySection');
-      const summaryBottom = $('#summaryBottom');
-      const transcriptRadio = $('#transcript');
-      const summaryRadio = $('#summary');
-
-      transcriptSection.removeClass('d-none');
-      transcriptBottom.removeClass('d-none');
-      summarySection.addClass('d-none');
-      summaryBottom.addClass('d-none');
-      transcriptRadio.prop('checked', true);
-
-      
-
-      transcriptRadio.change(function () {
-          console.log('Transcript radio selected');
-          if (this.checked) {
-              transcriptSection.removeClass('d-none');
-              transcriptBottom.removeClass('d-none');
-              summarySection.addClass('d-none');
-              summaryBottom.addClass('d-none');
-          }
-      });
-
-      summaryRadio.change(function () {
-          console.log('Summary radio selected');
-          if (this.checked) {
-              transcriptSection.addClass('d-none');
-              transcriptBottom.addClass('d-none');
-              summarySection.removeClass('d-none');
-              summaryBottom.removeClass('d-none');
-          }
+      // Initially, show the content for the first button
+      $('#youtube').show();
+      let segmentId = 'youtube';
+      initializePage(segmentId);
+  
+      // Set up click event listeners for all buttons
+      $('#sumYt, #sumText, #sumSite, #sumFile').click(function () {
+        // Hide all divs
+        $('.my-div').hide();
+        
+        // Get the corresponding div ID based on the clicked button
+        const buttonId = $(this).attr('id');
+        switch (buttonId) {
+          case 'sumText':
+            $('#text').show();
+            segmentId = 'text';
+            initializePage(segmentId);
+            break;
+          case 'sumSite':
+            $('#site').show();
+            segmentId = 'site';
+            initializePage(segmentId);
+            break;
+          case 'sumFile':
+            $('#file').show();
+            segmentId = 'file';
+            initializePage(segmentId);
+            break;
+          default:
+            $('#youtube').show();
+            segmentId = 'youtube';
+            initializePage(segmentId);
+            break;
+        }
       });
   });
+  </script>
+
+  <!--PDF drag and drop-->
+
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+  <script>
+    document.getElementById('drop-zone').addEventListener('drop', handleDrop, false);
+    document.getElementById('drop-zone').addEventListener('dragover', function (e) {
+        e.preventDefault();
+    }, false);
+
+    function handleDrop(e) {
+        e.preventDefault();
+
+        var file = e.dataTransfer.files[0];
+        if (file.type === 'application/pdf') {
+            readPDF(file);
+        } else {
+            alert('Please drop a valid PDF file.');
+        }
+    }
+
+    function readPDF(file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var arrayBuffer = e.target.result;
+
+            // Use PDF.js to read the contents
+            pdfjsLib.getDocument(arrayBuffer).then(function (pdfDoc) {
+                var text = '';
+                var numPages = pdfDoc.numPages;
+
+                for (var pageNum = 1; pageNum <= numPages; pageNum++) {
+                    pdfDoc.getPage(pageNum).then(function (page) {
+                        return page.getTextContent();
+                    }).then(function (content) {
+                        text += content.items.map(function (item) {
+                            return item.str;
+                        }).join(' ');
+                    }).catch(function (error) {
+                        console.error('Error getting text content:', error);
+                    });
+                }
+
+                document.getElementById('pdfTextarea').value = text;
+            }).catch(function (error) {
+                console.error('Error loading PDF:', error);
+            });
+        };
+
+        reader.readAsArrayBuffer(file);
+    }
 </script>
+
+<!--Not working, delete the previous script-->
+  
+
+
 
   <footer class="bg-light py-5 mt-5 d-flex">
     <div class="container">
