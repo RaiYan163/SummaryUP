@@ -65,7 +65,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
-<body>
+<body class="mb-1">
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -119,76 +119,38 @@
     </div>
 
     <!-- Testing purpose only. Nothing is final-->
+    <div class="card-body">
 
-    <!-- Hero Section -->
-    <section class="hero-section mt-5 mb-4 ">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <h1 class="hero-heading mb-4">Instant Summaries at Your Fingertips</h1>
-            <p class="hero-text mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id
-              aliquam
-              ultrices, nisl justo consequat nunc, vel tincidunt arcu enim at justo.</p>
-            <a href="{{ url_for('summary')}}" class="btn btn-primary btn-lg">Try Now</a>
-          </div>
-          <div class="col-lg-5 mt-5 mt-lg-0 ml-6">
-            <img src="/static/img/hero.png" alt="Background Image" class="img-fluid">
-          </div>
+      <h4 style="text-align: center;">Hello there,{{Name}}</h4>
+
+      <h5 style="margin-top: 40px; margin-bottom: 40px;">Save Links </h5>
+
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Enter title">
         </div>
-      </div>
-    </section>
-
-    <!-- Hero Section -->
-
-    <!-- Greeting Card -->
-    <section class="container">
-      <div class="mt-2 mb-4">
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-          <h2>Hello there, username!</h2>
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input type="text" class="form-control" id="link" placeholder="Enter link">
         </div>
-      </div>
-    </section>
-    <!-- End of Greeting Card -->
-
-    <!-- Rest of the code -->
-
-    <!-- Card Section -->
-    <section class="container mb-4">
-      <div class="row">
-
-        <div class="col-md-6">
-          <div class="card text-center">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h1 class="card-title">1</h1>
-                </div>
-                <div class="col">
-                  <h5 class="card-text">Number of Summaries Saved</h5>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="Transcript">Transcript</label>
+          <textarea class="form-control" id="description" rows="5"></textarea>
         </div>
-        <div class="col-md-6">
-          <div class="card text-center">
-            <div class="card-body">
-              <h1 class="card-title">2</h1>
-              <h5 class="card-text">Number of Links Saved</h5>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="Summary">Summary</label>
+          <textarea class="form-control" id="description" rows="4"></textarea>
         </div>
-      </div>
-    </section>
-    <!-- End of Number Section -->
-    <!-- Container with button -->
-    <div class="container">
-      <div class="d-flex justify-content-center align-items-center py-5">
-        <button class="btn btn-primary btn-lg mt-4 mb-4" type="button" >Show items</button>
-      </div>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary mr-2">Save</button>
+          <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        </div>
+      </form>
+
+
+
     </div>
-    
-  </div>
   </div>
 
 
@@ -209,9 +171,6 @@
 
     function dashboard() {
       window.location.href = "{{ url_for('dashboard')}}"
-    }
-    function saved_summaries() {
-      window.location.href = "{{ url_for('dashboard2')}}"
     }
     function summary() {
       window.location.href = "{{ url_for('summary')}}"
@@ -235,6 +194,13 @@
       }
     });
 
+    function confirmDelete() {
+      var result = confirm("Are you sure you want to delete?"); // Displays a confirmation dialog
+
+      if (result) {
+        console.log("Item deleted"); // If 'OK' is clicked in the confirmation dialog, log "Item deleted" to the console
+      }
+    }
 
     /*
      function showContent(contentId) {
@@ -248,23 +214,6 @@
     */
 
   </script>
-
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .content {
-      flex: 1;
-    }
-  </style>
-
-
-  <div class="content">
-    <!-- To move the footer to his position -->
-  </div>
 
   <footer class="bg-light py-5 mt-5 d-flex">
     <div class="container">
@@ -295,7 +244,6 @@
     </div>
   </footer>
 </body>
-
 
 
 
