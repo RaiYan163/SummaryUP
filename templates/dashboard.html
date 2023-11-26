@@ -184,7 +184,7 @@
     <!-- Container with button -->
     <div class="container">
       <div class="d-flex justify-content-center align-items-center py-5">
-        <button class="btn btn-primary btn-lg mt-4 mb-4" type="button" >Show items</button>
+        <button type="button" class="btn btn-primary btn-lg mt-4 mb-4" onclick="showitems()" >Show items</button>
       </div>
     </div>
     
@@ -207,11 +207,10 @@
   <!-- JS -->
   <script>
 
+  
+
     function dashboard() {
       window.location.href = "{{ url_for('dashboard')}}"
-    }
-    function saved_summaries() {
-      window.location.href = "{{ url_for('dashboard2')}}"
     }
     function summary() {
       window.location.href = "{{ url_for('summary')}}"
@@ -221,6 +220,10 @@
     }
     function logout() {
       window.location.href = "{{ url_for('logout')}}"
+    }
+
+    function showitems() {
+      window.location.href = "{{ url_for('show_items')}}"
     }
 
     $(document).ready(function () {
