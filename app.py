@@ -27,6 +27,7 @@ flow = Flow.from_client_secrets_file(
 
 
 
+
 def login_is_required(function):
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -72,30 +73,57 @@ def index():
     #return render_template('index.html')
     return render_template('index.html')
 
+
 @app.route('/dashboard')
 @login_is_required
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/dashboard2')
+@app.route('/show_items')
 @login_is_required
-def dashboard2():
-    return render_template('dashboard_saved_summaries.html')
+def show_items():
+    return render_template('show_items.html')
+
+
+@app.route('/edit_items')
+@login_is_required
+def edit_items():
+    return render_template('edit_items.html')
+
+
+@app.route('/open_items')
+@login_is_required
+def open_items():
+    return render_template('open_items.html')
+
+
+@app.route('/save_links')
+@login_is_required
+def savelinks():
+    return render_template('save_links.html')
+
+
+
+@app.route('/settings')
+@login_is_required
+def settings():
+    return render_template('settings.html')
+
+
+
 
 @app.route('/summary')
 @login_is_required
 def summary():
     return render_template('summary.html')
 
+
 @app.route('/user')
 @login_is_required
 def user():
     return "user page"
 
-@app.route('/settings')
-@login_is_required
-def settings():
-    return render_template('settings.html')
+
 
 @app.route('/logout')
 def logout():

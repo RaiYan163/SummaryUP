@@ -174,7 +174,7 @@
             <td>Sample Title 1</td>
             <td>
               <div class="d-flex justify-content-end"> <!-- Align actions to the right -->
-                <button type="button" class="btn btn-secondary" onclick="editContent()">Open</button>
+                <button type="button" class="btn btn-secondary" onclick="openContent()">Open</button>
               </div>
             </td>
           </tr>
@@ -239,7 +239,7 @@
       window.location.href = "{{ url_for('dashboard')}}"
     }
     function saved_summaries() {
-      window.location.href = "{{ url_for('dashboard2')}}"
+      window.location.href = "{{ url_for('dashboard')}}"
     }
     function summary() {
       window.location.href = "{{ url_for('summary')}}"
@@ -249,6 +249,10 @@
     }
     function logout() {
       window.location.href = "{{ url_for('logout')}}"
+    }
+
+    function openContent() {
+      window.location.href = "{{ url_for('open_items')}}"
     }
 
     $(document).ready(function () {
