@@ -1,0 +1,250 @@
+<!-- FILEPATH: /d:/SystemProject/SummaryUP/templates/checking.html -->
+<!-- Created by Saugata Roy Arghya-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>SummarUp</title>
+  <style>
+    .navbar {
+      background-color: #fff !important;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5) !important;
+      height: 80px;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+    }
+
+    .navbar-brand {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+    }
+
+    .card-header {
+      background-color: #fff;
+      border-bottom: none;
+    }
+
+    .card-header button {
+      background-color: transparent;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .card-header button:focus {
+      outline: none;
+      color: #fff;
+      background-color: #007bff;
+    }
+
+    .card-body {
+      background-color: #f8f9fa;
+    }
+  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- jQuery CDN-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body class="mb-1">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SummarUP Logo" width="30" height="24"
+          class="d-inline-block align-text-top">
+        SummarUP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile Picture" width="30"
+                height="30" class="rounded-circle">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    /* existing styles */
+    .card {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+      /*height: 600px;
+      /* new property */
+    }
+
+    /* existing styles */
+  </style>
+  <!-- Animation of the name -->
+
+
+  <!-- Card -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-center">
+      <div class="btn-group" role="group" aria-label="Toggle content">
+        <button type="button" class="btn btn-transparent" onclick="dashboard()">Dashboard</button>
+        <button type="button" class="btn btn-transparent" onclick="summary()">Summary</button>
+        <button type="button" class="btn btn-transparent" onclick="settings()">Settings</button>
+        <button type="button" class="btn btn-transparent" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Testing purpose only. Nothing is final-->
+    <div class="card-body">
+
+      <h4 style="text-align: center;">Hello there,{{Name}}</h4>
+
+      <h5 style="margin-top: 40px; margin-bottom: 40px;">Save Links </h5>
+
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Enter title">
+        </div>
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input type="text" class="form-control" id="link" placeholder="Enter link">
+        </div>
+        <div class="form-group">
+          <label for="Transcript">Transcript</label>
+          <textarea class="form-control" id="description" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="Summary">Summary</label>
+          <textarea class="form-control" id="description" rows="4"></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary mr-2">Save</button>
+          <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        </div>
+      </form>
+
+
+
+    </div>
+  </div>
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- JS -->
+  <script>
+
+    function dashboard() {
+      window.location.href = "{{ url_for('dashboard')}}"
+    }
+    function summary() {
+      window.location.href = "{{ url_for('summary')}}"
+    }
+    function settings() {
+      window.location.href = "{{ url_for('settings')}}"
+    }
+    function logout() {
+      window.location.href = "{{ url_for('logout')}}"
+    }
+
+    $(document).ready(function () {
+      var maxCardsToShow = 3; // Change this value to set the maximum number of cards
+
+      // Select the card deck and hide cards beyond the maximum limit
+      var cardDeck = $('#myCardDeck');
+      var cards = cardDeck.find('.card');
+
+      if (cards.length > maxCardsToShow) {
+        cards.slice(maxCardsToShow).hide();
+      }
+    });
+
+    function confirmDelete() {
+      var result = confirm("Are you sure you want to delete?"); // Displays a confirmation dialog
+
+      if (result) {
+        console.log("Item deleted"); // If 'OK' is clicked in the confirmation dialog, log "Item deleted" to the console
+      }
+    }
+
+    /*
+     function showContent(contentId) {
+      document.querySelectorAll('.card-body > div').forEach(div => {
+        div.style.display = 'none';
+      });
+
+      document.getElementById(contentId).style.display = 'block';
+    }
+
+    */
+
+  </script>
+
+  <footer class="bg-light py-5 mt-5 d-flex">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Company Name</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu fringilla bibendum, elit elit
+            consectetur ipsum, vel luctus sapien magna eu nulla.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Summary</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <ul class="list-unstyled">
+            <li><i class="fa fa-map-marker"></i> KUET, Telighati, KHU 1100</li>
+            <li><i class="fa fa-phone"></i> 123456789</li>
+            <li><i class="fa fa-envelope"></i>saugataroyarghya@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+
+
+</html>
