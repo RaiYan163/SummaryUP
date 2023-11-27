@@ -1,4 +1,5 @@
 # Byte-compiled / optimized / DLL files
+controller/__pycache__/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -20,3 +21,4 @@ instance/
 # Dependencies
 venv/
 system_32/
+summarize/
