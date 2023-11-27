@@ -60,13 +60,13 @@
                       <h5 class="card-title text-center">Continue with Google</h5>
                       <p class="card-text text-center">Login using your Google account.</p>
                       <div class="d-grid gap-3">
-                        <button type = "button" class="btn btn-danger" onclick="login()">
+                        <button type = "button" class="btn btn-danger" onclick="google_login()">
                           <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" class="me-2">
                           Continue with Google
                         </button>
                         <script>
-                            function login(){
-                                window.location.href = "{{ url_for('login')}}"
+                            function google_login(){
+                                window.location.href = "{{ url_for('google_login')}}"
                             }
                         </script>
                       </div>
