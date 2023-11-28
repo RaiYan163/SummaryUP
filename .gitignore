@@ -22,3 +22,4 @@ instance/
 venv/
 system_32/
 summarize/
+controller/dummy.py

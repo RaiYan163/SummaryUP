@@ -1,6 +1,6 @@
 from app import app, login_is_required
-from flask import render_template, redirect, session
-from controller import google_auth
+from flask import render_template, redirect, session, request
+from controller import google_auth,yt_transcript
 
 
 @app.route('/')
@@ -78,3 +78,16 @@ def logout():
 def protected_area():
     return "<a href = '/logout'>Logout</a> <br> <h4> Hello, your email is {} and <br> your name is {}.<\h4>".format(session['email'], session['name']) #This is just a test. You can delete or use this. -Saugata
 #The protected area is not done yet. I will do it later. Let me know the info from the gmail. -Saugata
+
+
+#For the Input and Ouput in the html general.
+
+@app.route('/yt_transcript', methods=['GET', 'POST'])
+def yt_transcript():
+    if request.method == 'POST':
+        youtube_link = request.form['url']
+        transcript = yt_transcript.transcript(youtube_link)
+        return render_template('summary.html',youtube_transcipt=transcript)
+    else:
+        return render_template('summary.html')
+    
