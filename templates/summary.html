@@ -44,27 +44,39 @@
    }
 
     .card-header {
-      background-color: #fff;
+      background-color: #D9363B;
       border-bottom: none;
     }
 
     .card-header button {
       background-color: transparent;
       border: none;
-      color: #000;
+      color: #fff;
       font-weight: bold;
       margin-right: 10px;
     }
 
     .card-header button:focus {
       outline: none;
-      color: #fff;
-      background-color: #007bff;
+      color: black;
+      background-color: white;
     }
 
     .card-body {
       background-color: #f8f9fa;
     }
+
+    .custom-btn-color {
+  background-color: #D9363B;
+  color: white;
+}
+.custom-btn-color:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  /* Other button styling properties for hover state */
+}
+
 
     
   </style>
@@ -141,7 +153,7 @@
 
 <style>
   .btn-group-toggle .btn-primary.active {
-      background-color: #007bff; /* Blue color for the active state */
+      background-color: #D9363B; /* Blue color for the active state */
       color: #fff; /* Text color for the active state */
   }
 
@@ -149,6 +161,8 @@
       background-color: #6c757d; /* Grey color for the inactive state */
       color: #fff; /* Text color for the inactive state */
   }
+
+
 </style>
 
 <style>
@@ -198,12 +212,13 @@
       <h4 style="text-align: center;">Summarise and Save</h4>
       <div class="d-flex justify-content-center mt-4">
         <div class="btn-group">
-        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumYt">Youtube</button>
-        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumText">Text</button>
-        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumSite">Site</button>
-        <button type="button" class="btn btn-primary rounded-pill mr-2" id="sumFile">File</button>
+          <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumYt">Youtube</button>
+          <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumText">Text</button>
+          <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumSite">Site</button>
+          <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumFile">File</button>
         </div>
       </div>
+      
 
       <div class="my-div" id="youtube">
 
@@ -220,8 +235,8 @@
               </div>
             </div>
             <div class="col-md-3">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <button type="Transcript" class="btn btn-primary">Transcript</button>
+              <button type="submit" class="btn btn-primary btn custom-btn-color">Save</button>
+              <button type="Transcript" class="btn btn-primary btn custom-btn-color">Transcript</button>
             </div>
           </div>
         </form>
@@ -253,7 +268,7 @@
         <div class="flex self-center" id="youtubetranscriptBottom">
           <label for="size">length</label>
           <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-          <button type="summarize" class="btn btn-primary">Summarize</button>
+          <button type="summarize" class="btn btn-primary btn custom-btn-color">Summarize</button>
         </div>
 
         <div class="flex self-center" id="youtubesummaryBottom">
@@ -365,8 +380,8 @@
     
             <div class="flex self-center" id="sitesummaryBottom">
               
-              <button type="summarize" class="btn btn-primary">Re-Summarize</button>
-              <button type="save" class="btn btn-primary">Save</button>
+              <button type="summarize" class="btn btn-primary custom-btn-color">Re-Summarize</button>
+              <button type="save" class="btn btn-primary custom-btn-color">Save</button>
             </div>
           </div>
           
@@ -438,9 +453,10 @@
 
       </div>
 
-      <div class="container-fluid panel panel-blue">
-        Hello! I am in a fluid width contianer.
-      </div>
+      <div class="container-fluid panel panel-blue" style="background-color: #D9363B;">
+       Load the transcript from youtube.
+    </div>
+    
       
 
 

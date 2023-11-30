@@ -36,29 +36,47 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
     }
 
+    .custom-summary-card {
+  background-color: #FFA500 !important; /* Orange color with !important to ensure override */
+  color: black; /* Assuming you want white text on a colored background */
+}
+
+.custom-links-card {
+  background-color: #FF4500 !important; /* Red color with !important to ensure override */
+  color: black;
+}
+
     .card-header {
-      background-color: #fff;
+      background-color: #d8363a;
       border-bottom: none;
     }
 
     .card-header button {
       background-color: transparent;
       border: none;
-      color: #000;
+      color: #fff;
       font-weight: bold;
       margin-right: 10px;
     }
 
     .card-header button:focus {
       outline: none;
-      color: #fff;
-      background-color: #007bff;
+      color: #d8363a;
+      background-color: white;
     }
 
     .card-body {
       background-color: #f8f9fa;
     }
+
+    .custom-button {
+      background-color: #d8363a;
+      color: white;
+ 
+}
   </style>
+
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <!-- jQuery CDN-->
@@ -72,7 +90,7 @@
       <a class="navbar-brand" href="#">
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SummarUP Logo" width="30" height="24"
           class="d-inline-block align-text-top">
-        SummarUP
+          SummarUP
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,7 +139,7 @@
     <!-- Testing purpose only. Nothing is final-->
 
     <!-- Hero Section -->
-    <section class="hero-section mt-5 mb-4 ">
+    <section class="hero-section mt-5 mb-2">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
@@ -129,7 +147,7 @@
             <p class="hero-text mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id
               aliquam
               ultrices, nisl justo consequat nunc, vel tincidunt arcu enim at justo.</p>
-            <a href="{{ url_for('summary')}}" class="btn btn-primary btn-lg">Try Now</a>
+              <a href="{{ url_for('summary')}}" class="btn custom-button btn-lg">Try Now</a>
           </div>
           <div class="col-lg-5 mt-5 mt-lg-0 ml-6">
             <img src="/static/img/hero.png" alt="Background Image" class="img-fluid">
@@ -155,36 +173,32 @@
     <!-- Card Section -->
     <section class="container mb-4">
       <div class="row">
-
-        <div class="col-md-6">
-          <div class="card text-center">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h1 class="card-title">1</h1>
-                </div>
-                <div class="col">
-                  <h5 class="card-text">Number of Summaries Saved</h5>
-                </div>
-              </div>
+        <div class="col-md-6" style="padding-right: 5px;">
+          <div class="card text-center custom-summary-card"> <!-- Updated class -->
+            <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
+              <h1 class="card-title">23</h1>
+              <h5 class="card-text">Saved Summaries</h5>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="card text-center">
-            <div class="card-body">
-              <h1 class="card-title">2</h1>
-              <h5 class="card-text">Number of Links Saved</h5>
+        <div class="col-md-6" style="padding-left: 5px;">
+           <div class="card text-center custom-links-card"> <!-- Updated class -->
+            <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
+              <h1 class="card-title">11</h1>
+              <h5 class="card-text">Saved Links</h5>
             </div>
           </div>
         </div>
       </div>
     </section>
+    
+    
     <!-- End of Number Section -->
     <!-- Container with button -->
     <div class="container">
       <div class="d-flex justify-content-center align-items-center py-5">
-        <button type="button" class="btn btn-primary btn-lg mt-4 mb-4" onclick="showitems()" >Show items</button>
+        <button type="button" class="btn btn-lg mt-4 mb-4 custom-button" onclick="showitems()">Show items</button>
+
       </div>
     </div>
     
@@ -280,10 +294,10 @@
         <div class="col-md-4">
           <h5>Quick Links</h5>
           <ul class="list-unstyled">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Summary</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="#" style="color: #d8363a;">Dashboard</a></li>
+            <li><a href="#" style="color: #d8363a;">About Us</a></li>
+            <li><a href="#" style="color: #d8363a;">Summary</a></li>
+            <li><a href="#" style="color: #d8363a;">Contact Us</a></li>
           </ul>
         </div>
         <div class="col-md-4">
