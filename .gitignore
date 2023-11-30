@@ -22,4 +22,5 @@ instance/
 venv/
 system_32/
 summarize/
+raiyanPC/
 controller/dummy.py
