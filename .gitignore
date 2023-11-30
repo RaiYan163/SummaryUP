@@ -22,3 +22,5 @@ instance/
 venv/
 raiyanPC/
 summarize/
+
+controller/dummy.py
