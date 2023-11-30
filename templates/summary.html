@@ -236,25 +236,25 @@
         </div>
       </div>
 
-
+    <!-- For Youtube -->
       <div class="my-div" id="youtube">
 
 
         <div class="container-md">
-          <form>
+          <form action="/yt_transcript" method="POST">
             <div class="row">
               <div class="col-md-2">
                 <label for="textInput" class="col-form-label">Youtube Link:</label>
               </div>
               <div class="col-md-7">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="textInput" name="textInput"
+                  <input type="text" class="form-control" id="textInput" name="ytURL"
                     placeholder="Enter Youtube URL">
                 </div>
               </div>
               <div class="col-md-3">
-                <button type="submit" class="btn btn-primary btn custom-btn-color">Save</button>
-                <button type="Transcript" class="btn btn-primary btn custom-btn-color">Transcript</button>
+                <button type="button" class="btn btn-primary btn custom-btn-color">Save</button>
+                <button type="submit" class="btn btn-primary btn custom-btn-color">Transcript</button>
               </div>
             </div>
           </form>
@@ -274,7 +274,7 @@
         <div class="container-md">
           <div class="form-group green-border-focus" id="youtubetranscriptSection">
             <label for="exampleFormControlTextarea5">Transcript</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20">{{result}}</textarea>
           </div>
 
           <div class="form-group green-border-focus" id="youtubesummarySection">
@@ -297,8 +297,7 @@
         </div>
 
       </div>
-
-
+     <!-- For Text -->
       <div class="my-div" id="text" style="display: none;">
 
 
@@ -344,7 +343,7 @@
         </div>
 
       </div>
-
+      <!-- For Site -->
       <div class="my-div" id="site" style="display: none;">
 
         <div class="container-md">
@@ -405,7 +404,7 @@
         </div>
 
       </div>
-
+      <!-- For File -->
       <div class="my-div" id="file" style="display: none;">
 
         <div class="container-md">
@@ -499,6 +498,33 @@
     crossorigin="anonymous"></script>
 
   <!-- JS -->
+  <!-- This section is for the button functionalities of Transcript, Summary, etc -->
+
+<script>
+  
+  function fetchTranscript() {
+    var youtubeLink = document.getElementById('textInput').value; // Get YouTube link from the text input
+
+    // AJAX request to fetch transcript
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        var transcript = this.responseText;
+
+        // Update the transcript section with the fetched transcript
+        document.getElementById('exampleFormControlTextarea5').value = transcript;
+      }
+    };
+    
+    xhr.open('POST', '/yt_transcript', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ url: youtubeLink }));
+  }
+
+</script>
+
+
+  <!-- This section is for the button functionalities of Transcript, Summary, etc -->
   <script>
 
     function dashboard() {

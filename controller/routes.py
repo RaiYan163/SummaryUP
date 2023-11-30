@@ -1,6 +1,8 @@
 from app import app, login_is_required
-from flask import render_template, redirect, session, request
-from controller import google_auth,yt_transcript
+from flask import render_template, redirect, session, jsonify
+from flask import request as req
+from controller import google_auth
+from .yt_transcript import transcript
 
 
 @app.route('/')
@@ -82,12 +84,12 @@ def protected_area():
 
 #For the Input and Ouput in the html general.
 
-@app.route('/yt_transcript', methods=['GET', 'POST'])
+
+
+@app.route('/yt_transcript', methods=['GET','POST'])
 def yt_transcript():
-    if request.method == 'POST':
-        youtube_link = request.form['url']
-        transcript = yt_transcript.transcript(youtube_link)
-        return render_template('summary.html',youtube_transcipt=transcript)
+    if req.method == 'POST':
+        url = req.form['ytURL']
+        return render_template('summary.html',result = transcript(url))
     else:
-        return render_template('summary.html')
-    
+        return render_template('summary.html',result = "Not a POST request!!")

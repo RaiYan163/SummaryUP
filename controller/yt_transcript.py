@@ -1,27 +1,27 @@
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
 
+random = "Hello"
 
 
-def transcript(url):
+def get_video_id(url):
     pattern = r'(?<=\?v=)[\w-]+'
     match = re.search(pattern, url)
     if match:
-        video_id = match.group(0)
-        print(video_id)
-    else:   
-        print("Video ID not found in the URL.")
-    
+        return match.group(0)
+    else:
+        return None
 
-    txt = YouTubeTranscriptApi.get_transcript(video_id) #Returning the JSON file
 
-    transcript_output = """ """
+def transcript(url):
+    video_id = get_video_id(url)
 
-    
-    for i in txt:
-        transcript_output = transcript_output + str(i['text']) + " " #Only taking the text element from the JSON file
-    
-    print(transcript_output)
-
-    return transcript_output
-
+    if video_id:
+        try:
+            txt = YouTubeTranscriptApi.get_transcript(video_id)
+            transcript_output = " ".join([i['text'] for i in txt])
+            return {'transcript': transcript_output}
+        except Exception as e:
+            return {'error': f"Failed to fetch transcript: {str(e)}"}, 500
+    else:
+        return {'error': 'Video ID not found in the URL'}, 400
