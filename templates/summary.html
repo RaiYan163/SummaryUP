@@ -67,18 +67,16 @@
     }
 
     .custom-btn-color {
-  background-color: #D9363B;
-  color: white;
-}
-.custom-btn-color:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-  /* Other button styling properties for hover state */
-}
+      background-color: #D9363B;
+      color: white;
+    }
 
-
-    
+    .custom-btn-color:hover {
+      background-color: white;
+      color: black;
+      border: 2px solid black;
+      /* Other button styling properties for hover state */
+    }
   </style>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -159,19 +157,21 @@
     }
   </style>
 
-<style>
-  .btn-group-toggle .btn-primary.active {
-      background-color: #D9363B; /* Blue color for the active state */
-      color: #fff; /* Text color for the active state */
-  }
+  <style>
+    .btn-group-toggle .btn-primary.active {
+      background-color: #D9363B;
+      /* Blue color for the active state */
+      color: #fff;
+      /* Text color for the active state */
+    }
 
-  .btn-group-toggle .btn-primary:not(.active) {
-      background-color: #6c757d; /* Grey color for the inactive state */
-      color: #fff; /* Text color for the inactive state */
-  }
-
-
-</style>
+    .btn-group-toggle .btn-primary:not(.active) {
+      background-color: #6c757d;
+      /* Grey color for the inactive state */
+      color: #fff;
+      /* Text color for the inactive state */
+    }
+  </style>
 
   <style>
     /* Add this style to set maximum width and height for the textarea */
@@ -235,11 +235,13 @@
           <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumFile">File</button>
         </div>
       </div>
-      
+
 
       <div class="my-div" id="youtube">
+
+
         <div class="container-md">
-          <form action="{{url_for('yt_transcript')}}" method="POST">
+          <form>
             <div class="row">
               <div class="col-md-2">
                 <label for="textInput" class="col-form-label">Youtube Link:</label>
@@ -254,20 +256,25 @@
                 <button type="submit" class="btn btn-primary btn custom-btn-color">Save</button>
                 <button type="Transcript" class="btn btn-primary btn custom-btn-color">Transcript</button>
               </div>
-             
             </div>
-            
+          </form>
+        </div>
+
+        <div class="container-md">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="radio" name="options" id="youtubetranscript" autocomplete="off" checked> Transcript
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="youtubesummary" autocomplete="off"> Summary
+            </label>
           </div>
         </div>
 
         <div class="container-md">
           <div class="form-group green-border-focus" id="youtubetranscriptSection">
             <label for="exampleFormControlTextarea5">Transcript</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20">
-              {% if transcript %}
-                    {{ transcript }}
-              {% endif %}
-            </textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
           </div>
 
           <div class="form-group green-border-focus" id="youtubesummarySection">
@@ -279,7 +286,7 @@
           <div class="flex self-center" id="youtubetranscriptBottom">
             <label for="size">length</label>
             <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-            <button type="summarize" class="btn btn-primary">Summarize</button>
+            <button type="summarize" class="btn btn-primary btn custom-btn-color">Summarize</button>
           </div>
 
           <div class="flex self-center" id="youtubesummaryBottom">
@@ -289,20 +296,6 @@
           </div>
         </div>
 
-      
-        <div class="flex self-center" id="youtubetranscriptBottom">
-          <label for="size">length</label>
-          <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-          <button type="summarize" class="btn btn-primary btn custom-btn-color">Summarize</button>
-        </div>
-
-        <div class="flex self-center" id="youtubesummaryBottom">
-          
-          <button type="summarize" class="btn btn-primary">Re-Summarize</button>
-          <button type="save" class="btn btn-primary">Save</button>
-        </div>
-      </div>
-      
       </div>
 
 
@@ -392,43 +385,9 @@
             <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
           </div>
 
-  
-          <div class="container-md">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="options" id="sitetranscript" autocomplete="off" checked> Transcript
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="options" id="sitesummary" autocomplete="off"> Summary
-              </label>
-            </div>
-          </div>
-          
-          <div class="container-md">
-            <div class="form-group green-border-focus" id="sitetranscriptSection">
-              <label for="exampleFormControlTextarea5">Transcript</label>
-              <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
-            </div>
-    
-            <div class="form-group green-border-focus" id="sitesummarySection">
-              <label for="exampleFormControlTextarea5">Summary</label>
-              <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
-            </div>
-    
-          
-            <div class="flex self-center" id="sitetranscriptBottom">
-              <label for="size">length</label>
-              <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-              <button type="summarize" class="btn btn-primary">Summarize</button>
-            </div>
-    
-            <div class="flex self-center" id="sitesummaryBottom">
-              
-              <button type="summarize" class="btn btn-primary custom-btn-color">Re-Summarize</button>
-              <button type="save" class="btn btn-primary custom-btn-color">Save</button>
-            </div>
-          </div>
-          
+          <div class="form-group green-border-focus" id="sitesummarySection">
+            <label for="exampleFormControlTextarea5">Summary</label>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
           </div>
 
 
@@ -440,6 +399,64 @@
 
           <div class="flex self-center" id="sitesummaryBottom">
 
+            <button type="summarize" class="btn btn-primary custom-btn-color">Re-Summarize</button>
+            <button type="save" class="btn btn-primary custom-btn-color">Save</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="my-div" id="file" style="display: none;">
+
+        <div class="container-md">
+          <div class=row>
+            <div class="col-md-6">
+              <div class="pdf-card">
+                <div class="card-body">
+                  <h5 class="card-title">PDF Reader</h5>
+                  <div id="drop-zone" class="drop-zone">
+                    Drag and drop PDF file here
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <h3>This is in File Segment.</h3>
+
+        <div class="container-md">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="radio" name="options" id="filetranscript" autocomplete="off" checked> Transcript
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="filesummary" autocomplete="off"> Summary
+            </label>
+          </div>
+        </div>
+
+        <div class="container-md">
+          <div class="form-group green-border-focus" id="filetranscriptSection">
+            <label for="exampleFormControlTextarea5">Transcript</label>
+            <textarea class="form-control" id="pdfTextarea" rows="20"></textarea>
+          </div>
+
+          <div class="form-group green-border-focus" id="filesummarySection">
+            <label for="exampleFormControlTextarea5">Summary</label>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+          </div>
+
+
+          <div class="flex self-center" id="filetranscriptBottom">
+            <label for="size">length</label>
+            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+            <button type="summarize" class="btn btn-primary">Summarize</button>
+          </div>
+
+          <div class="flex self-center" id="filesummaryBottom">
+
             <button type="summarize" class="btn btn-primary">Re-Summarize</button>
             <button type="save" class="btn btn-primary">Save</button>
           </div>
@@ -447,22 +464,29 @@
 
       </div>
 
-      <div class="container-fluid panel panel-blue" style="background-color: #D9363B;">
-       Load the transcript from youtube.
-    </div>
-    
-      
+
+
 
 
 
 
     </div>
 
-    <div class="container-fluid panel panel-blue">
-      Hello! I am in a fluid width contianer.
+    <div class="container-fluid panel panel-blue" style="background-color: #D9363B;">
+      Load the transcript from youtube.
     </div>
+
+
+
+
+
+
   </div>
-  
+  </div>
+
+
+
+
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -515,6 +539,7 @@
     */
 
   </script>
+
   <script>
 
     function initializePage(segmentId) {
@@ -590,8 +615,11 @@
       });
     });
   </script>
+
   <!--PDF drag and drop-->
+
   <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
   <script>
     document.getElementById('drop-zone').addEventListener('drop', handleDrop, false);
     document.getElementById('drop-zone').addEventListener('dragover', function (e) {
@@ -641,7 +669,12 @@
       reader.readAsArrayBuffer(file);
     }
   </script>
+
   <!--Not working, delete the previous script-->
+
+
+
+
   <footer class="bg-light py-5 mt-5 d-flex">
     <div class="container">
       <div class="row">
@@ -668,7 +701,6 @@
           </ul>
         </div>
       </div>
-    </div>
   </footer>
 </body>
 
