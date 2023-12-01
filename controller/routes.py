@@ -1,8 +1,11 @@
 from app import app, login_is_required
-from flask import render_template, redirect, session, jsonify
+from flask import render_template, redirect, session, jsonify, url_for, make_response
 from flask import request as req
 from controller import google_auth
 from .yt_transcript import transcript
+from .pegasus import pegasus
+from .punctuation import punctuation
+from .chunking import chunking
 
 
 @app.route('/')
@@ -83,13 +86,62 @@ def protected_area():
 
 
 #For the Input and Ouput in the html general.
-
-
-
-@app.route('/yt_transcript', methods=['GET','POST'])
-def yt_transcript():
+"""
+@app.route('/yt', methods=['GET', 'POST'])
+def yt():
+    print("Hello World")
     if req.method == 'POST':
         url = req.form['ytURL']
-        return render_template('summary.html',result = transcript(url))
+        if 'transcript' in req.form:
+            data = req.get.json('yt_url')
+            url = data.get('url')
+            transcript_output = transcript(url)['transcript']
+            return render_template('summary.html', transcript_area=transcript_output)
+            #return redirect(url_for('yt_transcript', yt_url=url))
+        elif 'summary' in req.form:
+            return redirect(url_for('yt_summarize', yt_url=url))
+        else: 
+            return render_template('summary.html', transcript_area="Not a POST request!!", summary_area="Not a POST request")
     else:
-        return render_template('summary.html',result = "Not a POST request!!")
+        return render_template('summary.html', transcript_area="kill me", summary_area="gese atleast")
+
+"""
+@app.route('/yt_transcript', methods=['GET', 'POST'])
+def yt_transcript():
+    if req.method == 'POST':
+        requ = req.get_json()
+        url = requ.get('yt_url')
+        transcript_output = transcript(url)['transcript']
+        #print(transcript_output)
+        #res = make_response(jsonify({"message": "OK"}), 200)
+        #return res
+        return jsonify({"transcript": transcript_output}),200
+    else:
+        return render_template('summary.html', transcript_area="Not a POST request!!")
+
+@app.route('/yt_summarize', methods=['GET', 'POST'])
+def yt_summarize():
+    requ = req.get_json()
+    print(requ)
+    text = transcript(url)['transcript']
+    chunks = chunking(text)
+    output = ""
+    for i, _ in enumerate(chunks):
+        temp_out = pegasus(chunks[i])
+        output += temp_out
+    summary = pegasus(output)
+    return render_template('summary.html', summary_area=summary)
+
+
+
+@app.route("/guestbook")
+def guestbook():
+    return render_template("summary.html")
+
+@app.route("/guestbook/create", methods=["GET","POST"])
+def create_entry():
+    requ = req.get.json()
+    print(requ)
+    res = make_response(jsonify({"message": "OK"}), 200)
+    return "Thanks"
+    

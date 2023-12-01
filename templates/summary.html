@@ -236,30 +236,25 @@
         </div>
       </div>
 
-    <!-- For Youtube -->
-      <div class="my-div" id="youtube">
-
-
+      <!-- For Youtube -->
+  
+      <div class="form-group" id="youtube">
         <div class="container-md">
-          <form action="/yt_transcript" method="POST">
-            <div class="row">
-              <div class="col-md-2">
-                <label for="textInput" class="col-form-label">Youtube Link:</label>
-              </div>
-              <div class="col-md-7">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="textInput" name="ytURL"
-                    placeholder="Enter Youtube URL">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <button type="button" class="btn btn-primary btn custom-btn-color">Save</button>
-                <button type="submit" class="btn btn-primary btn custom-btn-color">Transcript</button>
+          <div class="row">
+            <div class="col-md-2">
+              <label for="textInput" class="col-form-label">Youtube Link:</label>
+            </div>
+            <div class="col-md-7">
+              <div>
+                <input type="text" class="form-control" id="yt_url" placeholder="Enter Youtube URL">
               </div>
             </div>
-          </form>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn custom-btn-color" onclick="save_btn();">Save</button>
+              <button type="button" class="btn btn-primary btn custom-btn-color" onclick="transcript_btn();">Transcript</button>
+            </div>
+          </div>
         </div>
-
         <div class="container-md">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary active">
@@ -270,34 +265,30 @@
             </label>
           </div>
         </div>
-
         <div class="container-md">
           <div class="form-group green-border-focus" id="youtubetranscriptSection">
             <label for="exampleFormControlTextarea5">Transcript</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20">{{result}}</textarea>
+            <textarea class="form-control" id="transcript" rows="20">{{transcript_area}}</textarea>
           </div>
-
           <div class="form-group green-border-focus" id="youtubesummarySection">
             <label for="exampleFormControlTextarea5">Summary</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            <textarea class="form-control" id="summary" rows="20">{{summary_area}}</textarea>
           </div>
-
-
           <div class="flex self-center" id="youtubetranscriptBottom">
             <label for="size">length</label>
             <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-            <button type="summarize" class="btn btn-primary btn custom-btn-color">Summarize</button>
+            <button type="button" class="btn btn-primary btn custom-btn-color" onclick="summarize_btn();">Summarize</button>
           </div>
-
           <div class="flex self-center" id="youtubesummaryBottom">
-
-            <button type="summarize" class="btn btn-primary">Re-Summarize</button>
-            <button type="save" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" onclick="summarize_btn();">Re-Summarize</button>
+            <button type="submit" class="btn btn-primary" onclick="summarysave_btn();">Save</button>
           </div>
         </div>
-
       </div>
-     <!-- For Text -->
+      
+
+
+      <!-- For Text -->
       <div class="my-div" id="text" style="display: none;">
 
 
@@ -462,25 +453,11 @@
         </div>
 
       </div>
-
-
-
-
-
-
-
     </div>
 
     <div class="container-fluid panel panel-blue" style="background-color: #D9363B;">
       Load the transcript from youtube.
     </div>
-
-
-
-
-
-
-  </div>
   </div>
 
 
@@ -499,32 +476,49 @@
 
   <!-- JS -->
   <!-- This section is for the button functionalities of Transcript, Summary, etc -->
-
-<script>
+  <script src="jquery-3.7.1.min.js"></script>
+  <script>
   
-  function fetchTranscript() {
-    var youtubeLink = document.getElementById('textInput').value; // Get YouTube link from the text input
-
-    // AJAX request to fetch transcript
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        var transcript = this.responseText;
-
-        // Update the transcript section with the fetched transcript
-        document.getElementById('exampleFormControlTextarea5').value = transcript;
+    function transcript_btn() {
+      var x = document.getElementById('yt_url');
+      var entry = {
+        yt_url: x.value
       }
-    };
-    
-    xhr.open('POST', '/yt_transcript', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({ url: youtubeLink }));
+
+      console.log(entry);
+
+      fetch('/yt_transcript', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+    .then(response => {
+      // Handle the response from the Flask backend if needed
+      if(response.status !== 200){
+        console.log('Response status was not 200:',(response.status));
+        return ;
+      }
+      response.json().then(data => {
+        console.log(data);
+        document.getElementById('transcript').value = data.transcript;
+      });
+      console.log('Response received:', response);
+    })
+    .catch(error => {
+      // Handle any errors that occur during the fetch request
+      console.error('Error:', error);
+    });
   }
+    
 
-</script>
+  </script>
 
 
-  <!-- This section is for the button functionalities of Transcript, Summary, etc -->
+  <!-- This section is for the button functionalities for page turn -->
   <script>
 
     function dashboard() {
@@ -553,16 +547,7 @@
     });
 
 
-    /*
-     function showContent(contentId) {
-      document.querySelectorAll('.card-body > div').forEach(div => {
-        div.style.display = 'none';
-      });
-
-      document.getElementById(contentId).style.display = 'block';
-    }
-
-    */
+  
 
   </script>
 
@@ -697,10 +682,6 @@
   </script>
 
   <!--Not working, delete the previous script-->
-
-
-
-
   <footer class="bg-light py-5 mt-5 d-flex">
     <div class="container">
       <div class="row">
@@ -729,8 +710,6 @@
       </div>
   </footer>
 </body>
-
-
 
 
 </html>
