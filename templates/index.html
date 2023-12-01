@@ -22,6 +22,23 @@
 <body>
   <section class="h-100 gradient-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
+
+        <!-- Flash messages here -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="row">
+            <div class="col-12">
+              {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endwith %}
+      
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-10">
           <div class="card rounded-2 shadow-lg text-black">

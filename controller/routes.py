@@ -1,5 +1,5 @@
 from app import app, login_is_required, db
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from controller import google_auth
 from flask_login import login_user, logout_user, current_user, login_required, LoginManager
 from models import User, Summary, SavedLink, Admin
