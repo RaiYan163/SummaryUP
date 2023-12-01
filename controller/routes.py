@@ -121,16 +121,20 @@ def yt_transcript():
 
 @app.route('/yt_summarize', methods=['GET', 'POST'])
 def yt_summarize():
-    requ = req.get_json()
-    print(requ)
-    text = transcript(url)['transcript']
-    chunks = chunking(text)
-    output = ""
-    for i, _ in enumerate(chunks):
-        temp_out = pegasus(chunks[i])
-        output += temp_out
-    summary = pegasus(output)
-    return render_template('summary.html', summary_area=summary)
+    if req.method == 'POST':
+        requ = req.get_json()
+        url = requ.get('yt_url')
+        text = transcript(url)['transcript']
+        chunks = chunking(text)
+        output = ""
+        for i, _ in enumerate(chunks):
+            temp_out = pegasus(chunks[i])
+            output += temp_out
+        summary = pegasus(output)
+        return jsonify({"summary": summary}),200
+    else:
+        return render_template('summary.html', summary_area="Not a POST request!!")
+    
 
 
 

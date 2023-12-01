@@ -515,6 +515,42 @@
   }
     
 
+    function summarize_btn(){
+      var x = document.getElementById('yt_url');
+      var entry = {
+        yt_url: x.value
+      }
+
+      console.log(entry);
+
+      fetch('/yt_summarize', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+    .then(response => {
+      // Handle the response from the Flask backend if needed
+      if(response.status !== 200){
+        console.log('Response status was not 200:',(response.status));
+        return ;
+      }
+      response.json().then(data => {
+        console.log(data);
+        document.getElementById('summary').value = data.summary;
+      });
+      console.log('Response received:', response);
+    })
+    .catch(error => {
+      // Handle any errors that occur during the fetch request
+      console.error('Error:', error);
+    });
+
+    }
+
   </script>
 
 
