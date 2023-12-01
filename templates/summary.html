@@ -238,7 +238,7 @@
 
       <!-- For Youtube -->
   
-      <div class="form-group" id="youtube">
+      <div class="my-div form-group" id="youtube">
         <div class="container-md">
           <div class="row">
             <div class="col-md-2">
@@ -290,13 +290,9 @@
 
       <!-- For Text -->
       <div class="my-div" id="text" style="display: none;">
-
-
-
         <div class="container-md" style="background-color:#3178eb;">
           <h4 style="font-weight: bold; color: white;"> Copy The text and paste it in the text area below. </h4>
         </div>
-
         <div class="container-md">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary active">
@@ -307,33 +303,33 @@
             </label>
           </div>
         </div>
-
         <div class="container-md">
           <div class="form-group green-border-focus" id="texttranscriptSection">
-            <label for="exampleFormControlTextarea5">Transcript</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            <label for="txtTranscript">Transcript</label>
+            <textarea class="form-control" id="txtTranscript" rows="20"></textarea>
           </div>
 
           <div class="form-group green-border-focus" id="textsummarySection">
-            <label for="exampleFormControlTextarea5">Summary</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            <label for="txtSummary">Summary</label>
+            <textarea class="form-control" id="txtSummary" rows="20"></textarea>
           </div>
 
 
           <div class="flex self-center" id="texttranscriptBottom">
             <label for="size">length</label>
             <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-            <button type="summarize" class="btn btn-primary">Summarize</button>
+            <button type="summarize" class="btn btn-primary" onclick = "txtsummary_btn();">Summarize</button>
           </div>
 
           <div class="flex self-center" id="textsummaryBottom">
 
-            <button type="summarize" class="btn btn-primary">Re-Summarize</button>
-            <button type="save" class="btn btn-primary">Save</button>
+            <button type="summarize" class="btn btn-primary" onclick = "txtsummary_btn();">Re-Summarize</button>
+            <button type="save" class="btn btn-primary" onclick = "txtsummary_save();">Save</button>
           </div>
         </div>
-
       </div>
+
+
       <!-- For Site -->
       <div class="my-div" id="site" style="display: none;">
 
@@ -345,13 +341,13 @@
               </div>
               <div class="col-md-7">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="textInput" name="textInput"
-                    placeholder="Enter Youtube URL">
+                  <input type="text" class="form-control" id="wikilink" name="textInput"
+                    placeholder="Enter Wikipedia URL">
                 </div>
               </div>
               <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="Transcript" class="btn btn-primary">Transcript</button>
+                <button type="button" class="btn btn-primary" onclick="wikisave();">Save</button>
+                <button type="button" class="btn btn-primary" onclick="wikitranscript();">Transcript</button>
               </div>
             </div>
           </form>
@@ -384,13 +380,13 @@
           <div class="flex self-center" id="sitetranscriptBottom">
             <label for="size">length</label>
             <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
-            <button type="summarize" class="btn btn-primary">Summarize</button>
+            <button type="button" class="btn btn-primary" onclick="wikisum();">Summarize</button>
           </div>
 
           <div class="flex self-center" id="sitesummaryBottom">
 
-            <button type="summarize" class="btn btn-primary custom-btn-color">Re-Summarize</button>
-            <button type="save" class="btn btn-primary custom-btn-color">Save</button>
+            <button type="button" class="btn btn-primary custom-btn-color" onclick="wikisum();">Re-Summarize</button>
+            <button type="button" class="btn btn-primary custom-btn-color" onclick="wikisumsave();">Save</button>
           </div>
         </div>
 
@@ -464,9 +460,7 @@
 
 
   <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -474,9 +468,9 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-  <!-- JS -->
+  <!-- JS  <script src="jquery-3.7.1.min.js"></script>-->
   <!-- This section is for the button functionalities of Transcript, Summary, etc -->
-  <script src="jquery-3.7.1.min.js"></script>
+  
   <script>
   
     function transcript_btn() {
@@ -549,6 +543,100 @@
       console.error('Error:', error);
     });
 
+    }
+
+    function txtsummary_btn(){
+      var x = document.getElementById('txtTranscript');
+      var entry = {
+        txtTranscript: x.value
+      }
+
+      console.log(entry);
+
+      fetch('/txt_summarize', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+    .then (response => {
+      // Handle the response from the Flask backend if needed
+      if(response.status !== 200){
+        console.log('Response status was not 200:',(response.status));
+        return ;
+      }
+      response.json().then(data => {
+        console.log(data);
+        document.getElementById('txtSummary').value = data.summary;
+      });
+      console.log('Response received:', response);
+    })
+    }
+
+    function wikisum(){
+      var x = document.getElementById('wikilink');
+      var entry = {
+        wiki_url: x.value
+      }
+
+      console.log(entry);
+
+      fetch('/wiki_summarize', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+    .then (response => {
+      // Handle the response from the Flask backend if needed
+      if(response.status !== 200){
+        console.log('Response status was not 200:',(response.status));
+        return ;
+      }
+      response.json().then(data => {
+        console.log(data);
+        document.getElementById('exampleFormControlTextarea5').value = data.summary;
+      });
+      console.log('Response received:', response);
+    })
+    }
+
+    function wikitranscript()
+    {
+      var x = document.getElementById('wikilink');
+      var entry = {
+        wiki_url: x.value
+      }
+
+      console.log(entry);
+
+      fetch('/wiki_transcript', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+    .then (response => {
+      // Handle the response from the Flask backend if needed
+      if(response.status !== 200){
+        console.log('Response status was not 200:',(response.status));
+        return ;
+      }
+      response.json().then(data => {
+        console.log(data);
+        document.getElementById('exampleFormControlTextarea5').value = data.transcript;
+      });
+      console.log('Response received:', response);
+    })
     }
 
   </script>

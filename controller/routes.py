@@ -6,7 +6,7 @@ from .yt_transcript import transcript
 from .pegasus import pegasus
 from .punctuation import punctuation
 from .chunking import chunking
-
+from .wikip import wiki_sum, wiki_trans
 
 @app.route('/')
 def index():
@@ -86,26 +86,7 @@ def protected_area():
 
 
 #For the Input and Ouput in the html general.
-"""
-@app.route('/yt', methods=['GET', 'POST'])
-def yt():
-    print("Hello World")
-    if req.method == 'POST':
-        url = req.form['ytURL']
-        if 'transcript' in req.form:
-            data = req.get.json('yt_url')
-            url = data.get('url')
-            transcript_output = transcript(url)['transcript']
-            return render_template('summary.html', transcript_area=transcript_output)
-            #return redirect(url_for('yt_transcript', yt_url=url))
-        elif 'summary' in req.form:
-            return redirect(url_for('yt_summarize', yt_url=url))
-        else: 
-            return render_template('summary.html', transcript_area="Not a POST request!!", summary_area="Not a POST request")
-    else:
-        return render_template('summary.html', transcript_area="kill me", summary_area="gese atleast")
 
-"""
 @app.route('/yt_transcript', methods=['GET', 'POST'])
 def yt_transcript():
     if req.method == 'POST':
@@ -134,18 +115,42 @@ def yt_summarize():
         return jsonify({"summary": summary}),200
     else:
         return render_template('summary.html', summary_area="Not a POST request!!")
+
+@app.route('/txt_summarize', methods=['GET', 'POST'])
+def txt_summarize():
+    if req.method == 'POST':
+        requ = req.get_json()
+        text = requ.get('txtTranscript')
+        chunks = chunking(text)
+        output = ""
+        for i, _ in enumerate(chunks):
+            temp_out = pegasus(chunks[i])
+            output += temp_out
+        summary = pegasus(output)
+        return jsonify({"summary": summary}),200
+    else:
+        return render_template('summary.html', summary_area="Not a POST request!!")    
+
+
+@app.route('/wiki_summarize', methods=['GET', 'POST'])
+def wiki_summarize():
+    if req.method == 'POST':
+        requ = req.get_json()
+        url = requ.get('wiki_url')
+        print(url)
+        temp = wiki_sum(url)
+        summary = pegasus(temp)
+        return jsonify({"summary": summary}),200
+    else:
+        return render_template('summary.html', summary_area="Not a POST request!!")
     
-
-
-
-@app.route("/guestbook")
-def guestbook():
-    return render_template("summary.html")
-
-@app.route("/guestbook/create", methods=["GET","POST"])
-def create_entry():
-    requ = req.get.json()
-    print(requ)
-    res = make_response(jsonify({"message": "OK"}), 200)
-    return "Thanks"
-    
+@app.route('/wiki_transcript', methods=['GET', 'POST'])
+def wiki_transcript():
+    if req.method == 'POST':
+        requ = req.get_json()
+        url = requ.get('wiki_url')
+        print(url)
+        transcript = wiki_trans(url)
+        return jsonify({"transcript": transcript}),200
+    else:
+        return render_template('summary.html', summary_area="Not a POST request!!")
