@@ -3,24 +3,44 @@ from functools import wraps
 from flask import Flask, abort, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from dotenv import load_dotenv
+
+import os
+load_dotenv()
+
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://xzlj0gufspd4pn0mbtnj:pscale_pw_QSVQJ5xWskVu2rCmDmwZYK2UYB90lE0l5Ypca1ddbRs@aws.connect.psdb.cloud/python-practice'
 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
 
-#Creating the database
+# SSL configuration in JSON format
+ssl_config = {
+    "ssl": {
+        "ssl_ca": "/etc/ssl/cert.pem"
+    }
+}
+
+# Convert SSL configuration to a query string
+ssl_query_string = "&".join([f"{key}={value}" for key, value in ssl_config["ssl"].items()])
+
+# Append SSL query string to the URI
+app.config['SQLALCHEMY_DATABASE_URI'] += f"?{ssl_query_string}"
+
+#create the database
 db = SQLAlchemy(app)
 
-#starting the login from here
+#starting login
 login = LoginManager(app)
+
+from models import*
 
 
 
 
 app.secret_key = "secret key"
 
-def login_is_required(function):
+def login_is_required(function): 
     @wraps(function)
     def wrapper(*args, **kwargs):
         if 'google_id' not in session:

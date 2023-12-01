@@ -1,11 +1,55 @@
-from app import app, login_is_required
-from flask import render_template, redirect, session
+from app import app, login_is_required, db
+from flask import render_template, redirect, url_for
 from controller import google_auth
+from flask_login import login_user, logout_user, current_user, login_required, LoginManager
+from models import User, Summary, SavedLink, Admin
+from forms import LoginForm
 
 
-@app.route('/')
+###Log In Part####
+
+login = LoginManager(app)  
+
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+
+
+@app.route('/login', methods=['POST'])
+def login_view():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.userEmail.data).first()
+
+        # Ensure that the user is not None and the password field is not None
+        if user and user.password is not None and user.check_password(form.password.data):
+            login_user(user)
+            return redirect(url_for("dashboard"))
+        else:
+            # If login doesn't succeed, send an error message back to the form
+            flash('Invalid username or password')
+
+    return render_template('index.html', form=form)
+
+
+
+
+
+
+
+@app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    form = LoginForm()
+    return render_template('index.html', form=form)
+
+### Login and Logout Stuff
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
 
 
 #For Google Login. -Saugata
@@ -64,10 +108,7 @@ def settings():
     return render_template('settings.html')
 
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect("/")
+
 
 
 

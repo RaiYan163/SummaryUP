@@ -9,7 +9,7 @@ class User(UserMixin, db.Model):
     firstName = db.Column(db.String(255))
     lastName = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, index=True)
-    password_hash = db.Column(db.String(255))
+    password= db.Column(db.String(255))
     avatar = db.Column(db.String(255))
     gender = db.Column(db.String(255))
     age = db.Column(db.Integer)
@@ -18,10 +18,10 @@ class User(UserMixin, db.Model):
     saved_links = db.relationship('SavedLink', backref='user', lazy=True)
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.password = password
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return self.password == password
 
     def get_id(self):
         return str(self.userID)
