@@ -1,9 +1,20 @@
 # Importing the necessary libraries
 from functools import wraps
 from flask import Flask, abort, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://xzlj0gufspd4pn0mbtnj:pscale_pw_QSVQJ5xWskVu2rCmDmwZYK2UYB90lE0l5Ypca1ddbRs@aws.connect.psdb.cloud/python-practice'
+
+
+#Creating the database
+db = SQLAlchemy(app)
+
+#starting the login from here
+login = LoginManager(app)
+
 
 
 
