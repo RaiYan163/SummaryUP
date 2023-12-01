@@ -23,22 +23,6 @@
   <section class="h-100 gradient-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
 
-        <!-- Flash messages here -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <div class="row">
-            <div class="col-12">
-              {% for message in messages %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                  {{ message }}
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-      {% endwith %}
-      
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-10">
           <div class="card rounded-2 shadow-lg text-black">
@@ -51,48 +35,50 @@
                     <h4 class="mt-1 mb-5 pb-1">Log in</h4>
                   </div>
 
-                  <form method="POST" action="/login">
-                    {{ form.hidden_tag() }}
+                  <form method="POST" action="/">
                     <p>Please login to your account</p>
 
-                    <!-- Email field -->
                     <div class="form-outline mb-4">
-                      {{ form.userEmail.label }}
-                      {{ form.userEmail(class="form-control", placeholder="Give a valid email address") }}
-                    </div>
-
-                    <!-- Password field -->
-                    <div class="form-outline mb-4">
-                      {{ form.password.label }}
-                      {{ form.password(class="form-control", placeholder="Password") }}
-                    </div>
+                      <input type="email" id="email" name="email" class="form-control" placeholder="Enter Valid Email Address" />
+                      <label class="form-label" for="email">Email</label>
+                  </div>
+                  
+                  <div class="form-outline mb-4">
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+                      <label class="form-label" for="password">Password</label>
+                  </div>
 
                     <div class="text-center pt-1 mb-2 pb-1">
-                      {{ form.submit(class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3") }}
+                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
+                        in</button>
+                    
                     </div>
+                    <div class="card-body">
+                      <h5 class="card-title text-center">Continue with Google</h5>
+                      <p class="card-text text-center">Login using your Google account.</p>
+                      <div class="d-grid gap-3">
+                        <button type = "button" class="btn btn-danger" onclick="google_login()">
+                          <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" class="me-2">
+                          Continue with Google
+                        </button>
+                        <script>
+                            function google_login(){
+                                window.location.href = "{{ url_for('google_login')}}"
+                            }
+                        </script>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <p class="mb-0 me-2">Don't have an account?</p>
+                      <button type="button" class="btn btn-outline-danger" onclick="redirectToSignup()">Create new</button>
+                    </div>
+
                   </form>
+                 
+                    
 
-                  <div class="card-body">
-                    <h5 class="card-title text-center">Continue with Google</h5>
-                    <p class="card-text text-center">Login using your Google account.</p>
-                    <div class="d-grid gap-3">
-                      <button type="button" class="btn btn-danger" onclick="googleLogin()">
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo"
-                          class="me-2">
-                        Continue with Google
-                      </button>
-                      <script>
-                        function googleLogin() {
-                          window.location.href = "{{ url_for('google_login')}}"
-                        }
-                      </script>
-                    </div>
-                  </div>
-
-                  <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <button type="button" class="btn btn-outline-danger">Create new</button>
-                  </div>
+               
 
                 </div>
               </div>
@@ -109,6 +95,12 @@
       </div>
     </div>
   </section>
+
+  <script>
+    function redirectToSignup() {
+        window.location.href = "/sign-up"; 
+    }
+</script>
 </body>
 
 </html>

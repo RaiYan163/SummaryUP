@@ -1,48 +1,60 @@
 from app import app, login_is_required, db
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, request, flash, url_for
 from controller import google_auth
 from flask_login import login_user, logout_user, current_user, login_required, LoginManager
 from models import User, Summary, SavedLink, Admin
 from forms import LoginForm
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 ###Log In Part####
 
-login = LoginManager(app)  
-
-@login.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 
 
 
-@app.route('/login', methods=['POST'])
-def login_view():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.userEmail.data).first()
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        data = request.form
+        print(data)
+    return render_template("login.html", boolean=True)
 
-        # Ensure that the user is not None and the password field is not None
-        if user and user.password is not None and user.check_password(form.password.data):
-            login_user(user)
-            return redirect(url_for("dashboard"))
+@app.route('/sign-up', methods=['GET', 'POST'])
+def signUp():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        firstName = request.form.get('firstName')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+
+        if len(email) < 4:
+            flash('Email must be greater than 3 characters.', category="error")
+            email = request.form.get('email')
+        elif len(firstName) < 2:
+            flash('FirstName must be greater than 1 characters.', category="error")
+            email = request.form.get('email')
+            firstName = request.form.get('firstName')
+        elif password1 != password2:
+            flash('Passwords Dont match', category="error")
+            email = request.form.get('email')
+            firstName = request.form.get('firstName')
+        elif len(password1) < 7:
+            flash('Password must be at least 7 characters.', category = 'error')
+            email = request.form.get('email')
+            firstName = request.form.get('firstName')
         else:
-            # If login doesn't succeed, send an error message back to the form
-            flash('Invalid username or password')
+            
+            new_user = User(email=email, firstName=firstName, password=generate_password_hash(password1, method='pbkdf2:sha256'))
 
-    return render_template('index.html', form=form)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Account Created!',  category = 'success')
+            return redirect('/')
+    
 
+    return render_template("signUp.html")
 
-
-
-
-
-
-@app.route('/', methods=['GET'])
-def index():
-    form = LoginForm()
-    return render_template('index.html', form=form)
 
 ### Login and Logout Stuff
 @app.route('/logout')
@@ -56,6 +68,8 @@ def logout():
 @app.route('/google_login')
 def google_login():
     return google_auth.google_login(google_auth.setup_google_auth())
+
+
 
 @app.route('/callback')
 def callback():

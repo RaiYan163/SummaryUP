@@ -1,6 +1,5 @@
 from app import db
 from flask_login import UserMixin
-from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 
 ######### User Model #############
@@ -46,6 +45,3 @@ class Admin(db.Model):
     adminName = db.Column(db.String(255))
     password = db.Column(db.String(255))
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
