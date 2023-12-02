@@ -36,73 +36,43 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
     }
 
-    .custom-summary-card {
-  background-color: #FFA500 !important; /* Orange color with !important to ensure override */
-  color: black; /* Assuming you want white text on a colored background */
-}
-
-.custom-links-card {
-  background-color: #FF4500 !important; /* Red color with !important to ensure override */
-  color: black;
-}
-
     .card-header {
-      background-color: #d8363a;
+      background-color: #fff;
       border-bottom: none;
     }
 
     .card-header button {
       background-color: transparent;
       border: none;
-      color: #fff;
+      color: #000;
       font-weight: bold;
       margin-right: 10px;
     }
 
     .card-header button:focus {
       outline: none;
-      color: #d8363a;
-      background-color: white;
+      color: #fff;
+      background-color: #007bff;
     }
 
     .card-body {
       background-color: #f8f9fa;
     }
-
-    .custom-button {
-      background-color: #d8363a;
-      color: white;
- 
-    }
-
-    .selected-card {
-    background-color: white; /* Change to your desired color */
-    color: #d8363a; /* Change to your desired text color */
-    border: 2px solid red3; /* Change to your desired border style */
-    }
-
-  selected-card {
-  background-color: #007bff; /* Change to your desired color */
-  color: #fff; /* Change to your desired text color */
-  border: 2px solid #0056b3; /* Change to your desired border style */
-}
   </style>
-
-  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <!-- jQuery CDN-->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
-<body>
+<body class="mb-1">
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SummarUP Logo" width="30" height="24"
           class="d-inline-block align-text-top">
-          SummarUP
+        SummarUP
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,73 +119,38 @@
     </div>
 
     <!-- Testing purpose only. Nothing is final-->
+    <div class="card-body">
 
-    <!-- Hero Section -->
-    <section class="hero-section mt-5 mb-2">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <h1 class="hero-heading mb-4 ml-4">Instant Summaries at Your Fingertips</h1>
-            <p class="hero-text mb-4 ml-4 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id
-              aliquam
-              ultrices, nisl justo consequat nunc, vel tincidunt arcu enim at justo.</p>
-              <a href="{{ url_for('summary')}}" class="btn custom-button btn-lg ml-4">Try Now</a>
-          </div>
-          <div class="col-lg-5 mt-5 mt-lg-0 ml-6">
-            <img src="/static/img/hero.png" alt="Background Image" class="img-fluid ml-5">
-          </div>
+      <h4 style="text-align: center;">Hello there,{{Name}}</h4>
+
+      <h5 style="margin-top: 40px; margin-bottom: 40px;">Save Links </h5>
+
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Enter title">
         </div>
-      </div>
-    </section>
-
-    <!-- Hero Section -->
-
-    <!-- Greeting Card -->
-    <section class="container">
-      <div class="mt-2 mb-4">
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-          <h2>Hello there, {{ current_user.firstName }}!</h2>
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input type="text" class="form-control" id="link" placeholder="Enter link">
         </div>
-      </div>
-    </section>
-    <!-- End of Greeting Card -->
-
-    <!-- Rest of the code -->
-
-    <!-- Card Section -->
-    <section class="container mb-4">
-      <div class="row">
-        <div class="col-md-6" style="padding-right: 5px;">
-          <div class="card text-center custom-summary-card" onclick="toggleCardSelection(this, 'summaries')" data-card-type="summaries">
-            <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
-              <h1 class="card-title">23</h1>
-              <h5 class="card-text">Saved Summaries</h5>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="Transcript">Transcript</label>
+          <textarea class="form-control" id="description" rows="5"></textarea>
         </div>
-        <div class="col-md-6" style="padding-left: 5px;">
-          <div class="card text-center custom-links-card" onclick="toggleCardSelection(this, 'links')" data-card-type="links">
-            <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
-              <h1 class="card-title">11</h1>
-              <h5 class="card-text">Saved Links</h5>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="Summary">Summary</label>
+          <textarea class="form-control" id="description" rows="4"></textarea>
         </div>
-      </div>
-    </section>
-    
-    
-    
-    <!-- End of Number Section -->
-    <!-- Container with button -->
-    <div class="container">
-      <div class="d-flex justify-content-center align-items-center py-5">
-        <button type="button" class="btn btn-lg mt-4 mb-4 custom-button" onclick="showitems()">Show items</button>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary mr-2">Save</button>
+          <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        </div>
+      </form>
 
-      </div>
+
+
     </div>
-    
-  </div>
   </div>
 
 
@@ -234,8 +169,6 @@
   <!-- JS -->
   <script>
 
-  
-
     function dashboard() {
       window.location.href = "{{ url_for('dashboard')}}"
     }
@@ -247,14 +180,6 @@
     }
     function logout() {
       window.location.href = "{{ url_for('logout')}}"
-    }
-
-    function showSummary() {
-      window.location.href = "{{ url_for('showSummary')}}"
-    }
-
-    function showLinks() {
-      window.location.href = "{{ url_for('showLinks')}}"
     }
 
     $(document).ready(function () {
@@ -269,6 +194,13 @@
       }
     });
 
+    function confirmDelete() {
+      var result = confirm("Are you sure you want to delete?"); // Displays a confirmation dialog
+
+      if (result) {
+        console.log("Item deleted"); // If 'OK' is clicked in the confirmation dialog, log "Item deleted" to the console
+      }
+    }
 
     /*
      function showContent(contentId) {
@@ -282,45 +214,6 @@
     */
 
   </script>
-  <script>
-    var selectedCard = null;
-
-function toggleCardSelection(card, cardType) {
-    if (selectedCard) {
-        selectedCard.classList.remove('selected-card');
-    }
-    selectedCard = card;
-    card.classList.add('selected-card');
-    selectedCardType = cardType;
-}
-
-function showitems() {
-    if (selectedCardType === 'summaries') {
-        showSummary();
-    } else if (selectedCardType === 'links') {
-        showLinks();
-    } else {
-        alert('Please select a card.');
-    }
-}
-  </script>
-
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .content {
-      flex: 1;
-    }
-  </style>
-
-
-  <div class="content">
-    <!-- To move the footer to his position -->
-  </div>
 
   <footer class="bg-light py-5 mt-5 d-flex">
     <div class="container">
@@ -333,10 +226,10 @@ function showitems() {
         <div class="col-md-4">
           <h5>Quick Links</h5>
           <ul class="list-unstyled">
-            <li><a href="#" style="color: #d8363a;">Dashboard</a></li>
-            <li><a href="#" style="color: #d8363a;">About Us</a></li>
-            <li><a href="#" style="color: #d8363a;">Summary</a></li>
-            <li><a href="#" style="color: #d8363a;">Contact Us</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Summary</a></li>
+            <li><a href="#">Contact Us</a></li>
           </ul>
         </div>
         <div class="col-md-4">
@@ -351,7 +244,6 @@ function showitems() {
     </div>
   </footer>
 </body>
-
 
 
 

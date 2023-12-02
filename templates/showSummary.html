@@ -1,7 +1,3 @@
-<!-- FILEPATH: /d:/SystemProject/SummaryUP/templates/checking.html -->
-<!-- Created by Saugata Roy Arghya-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,20 +32,33 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
     }
 
-    .custom-summary-card {
-  background-color: #FFA500 !important; /* Orange color with !important to ensure override */
-  color: black; /* Assuming you want white text on a colored background */
-}
-
-.custom-links-card {
-  background-color: #FF4500 !important; /* Red color with !important to ensure override */
-  color: black;
-}
-
     .card-header {
-      background-color: #d8363a;
+      background-color: #D9363B;
       border-bottom: none;
     }
+
+    .custom-toggle-button {
+    background-color: white;
+    border: 2px solid red;
+    color: #D9363B;
+  }
+
+  .custom-toggle-button:hover {
+    background-color: #D9363B;
+    color: white;
+  }
+
+  .custom-button {
+    background-color: #D9363B;
+    border: 2px solid red;
+    color: white;
+  }
+
+  .custom-button:hover {
+    background-color: white;
+    border: 2px solid #D9363B;
+    color: #D9363B;
+  }
 
     .card-header button {
       background-color: transparent;
@@ -61,34 +70,19 @@
 
     .card-header button:focus {
       outline: none;
-      color: #d8363a;
-      background-color: white;
+      color: #fff;
+      background-color: #007bff;
     }
 
     .card-body {
       background-color: #f8f9fa;
     }
 
-    .custom-button {
-      background-color: #d8363a;
-      color: white;
- 
-    }
-
-    .selected-card {
-    background-color: white; /* Change to your desired color */
-    color: #d8363a; /* Change to your desired text color */
-    border: 2px solid red3; /* Change to your desired border style */
-    }
-
-  selected-card {
-  background-color: #007bff; /* Change to your desired color */
-  color: #fff; /* Change to your desired text color */
-  border: 2px solid #0056b3; /* Change to your desired border style */
-}
+    .page-item.active .page-link {
+     background-color: #D9363B;
+     color: white;
+     }
   </style>
-
-  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <!-- jQuery CDN-->
@@ -102,8 +96,9 @@
       <a class="navbar-brand" href="#">
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SummarUP Logo" width="30" height="24"
           class="d-inline-block align-text-top">
-          SummarUP
+        SummarUP
       </a>
+      <p>Show Saved Summaries</p>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -138,7 +133,7 @@
 
 
   <!-- Card -->
-  <div class="card">
+  <div class="card mb-4">
     <div class="card-header d-flex justify-content-center">
       <div class="btn-group" role="group" aria-label="Toggle content">
         <button type="button" class="btn btn-transparent" onclick="dashboard()">Dashboard</button>
@@ -149,74 +144,77 @@
     </div>
 
     <!-- Testing purpose only. Nothing is final-->
+    <!-- Dropdown JS -->
+    <script>
+      $(document).ready(function () {
+        $('.dropdown-menu a').on('click', function () {
+          var selectedOption = $(this).text();
+          $(this).closest('.dropdown').find('.dropdown-toggle').text(selectedOption);
+        });
+      });
+    </script>
 
-    <!-- Hero Section -->
-    <section class="hero-section mt-5 mb-2">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <h1 class="hero-heading mb-4 ml-4">Instant Summaries at Your Fingertips</h1>
-            <p class="hero-text mb-4 ml-4 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id
-              aliquam
-              ultrices, nisl justo consequat nunc, vel tincidunt arcu enim at justo.</p>
-              <a href="{{ url_for('summary')}}" class="btn custom-button btn-lg ml-4">Try Now</a>
-          </div>
-          <div class="col-lg-5 mt-5 mt-lg-0 ml-6">
-            <img src="/static/img/hero.png" alt="Background Image" class="img-fluid ml-5">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hero Section -->
-
-    <!-- Greeting Card -->
-    <section class="container">
-      <div class="mt-2 mb-4">
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-          <h2>Hello there, {{ current_user.firstName }}!</h2>
-        </div>
-      </div>
-    </section>
-    <!-- End of Greeting Card -->
-
-    <!-- Rest of the code -->
-
-    <!-- Card Section -->
-    <section class="container mb-4">
+    <!-- Dropdown Menu -->
+    <div class="container d-flex justify-content-center mb-5 mt-4 ml-4">
       <div class="row">
-        <div class="col-md-6" style="padding-right: 5px;">
-          <div class="card text-center custom-summary-card" onclick="toggleCardSelection(this, 'summaries')" data-card-type="summaries">
-            <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
-              <h1 class="card-title">23</h1>
-              <h5 class="card-text">Saved Summaries</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6" style="padding-left: 5px;">
-          <div class="card text-center custom-links-card" onclick="toggleCardSelection(this, 'links')" data-card-type="links">
-            <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
-              <h1 class="card-title">11</h1>
-              <h5 class="card-text">Saved Links</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    
-    
-    <!-- End of Number Section -->
-    <!-- Container with button -->
-    <div class="container">
-      <div class="d-flex justify-content-center align-items-center py-5">
-        <button type="button" class="btn btn-lg mt-4 mb-4 custom-button" onclick="showitems()">Show items</button>
-
-      </div>
+        <button type="button" id="loadButton" class="btn custom-button mr-5">Show</button>
     </div>
-    
+    </div>
+
+    <!-- Table -->
+    <div style="overflow-x: auto;">
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Serial Number</th>
+            <th scope="col">Title</th>
+            <th scope="col">Rating</th>
+            <th scope="col" style="text-align: right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for summary in summaries %}
+            <tr>
+              <th scope="row">{{ loop.index }}</th>
+              <td>{{ summary.summaryTitle }}</td>
+              <td>{{ summary.rating }}</td>
+              
+              <td>
+                <div class="d-flex justify-content-end">
+                  <button type="button" class="custom-button" onclick="editContent('{{ summary.id }}')">Open</button>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+
   </div>
-  </div>
+
 
 
 
@@ -234,9 +232,10 @@
   <!-- JS -->
   <script>
 
-  
-
     function dashboard() {
+      window.location.href = "{{ url_for('dashboard')}}"
+    }
+    function saved_summaries() {
       window.location.href = "{{ url_for('dashboard')}}"
     }
     function summary() {
@@ -249,12 +248,8 @@
       window.location.href = "{{ url_for('logout')}}"
     }
 
-    function showSummary() {
-      window.location.href = "{{ url_for('showSummary')}}"
-    }
-
-    function showLinks() {
-      window.location.href = "{{ url_for('showLinks')}}"
+    function openContent() {
+      window.location.href = "{{ url_for('open_items')}}"
     }
 
     $(document).ready(function () {
@@ -275,34 +270,37 @@
       document.querySelectorAll('.card-body > div').forEach(div => {
         div.style.display = 'none';
       });
-
+ 
       document.getElementById(contentId).style.display = 'block';
     }
-
+ 
     */
 
   </script>
-  <script>
-    var selectedCard = null;
 
-function toggleCardSelection(card, cardType) {
-    if (selectedCard) {
-        selectedCard.classList.remove('selected-card');
-    }
-    selectedCard = card;
-    card.classList.add('selected-card');
-    selectedCardType = cardType;
-}
-
-function showitems() {
-    if (selectedCardType === 'summaries') {
-        showSummary();
-    } else if (selectedCardType === 'links') {
-        showLinks();
-    } else {
-        alert('Please select a card.');
-    }
-}
+<script>
+  document.getElementById('loadButton').addEventListener('click', function() {
+      fetch('/get-summaries')
+          .then(response => response.json())
+          .then(data => {
+              const tableBody = document.getElementById('tableBody');
+              tableBody.innerHTML = '';  // Clear existing content
+              data.forEach((summary, index) => {
+                  const row = `<tr>
+                                  <th scope="row">${index + 1}</th>
+                                  <td>${summary.summaryTitle}</td>
+                                  <td>${summary.rating}</td>
+                                  <td>
+                                      <div class="d-flex justify-content-end">
+                                          <button type="button" class="custom-button" onclick="editContent('${summary.id}')">Open</button>
+                                      </div>
+                                  </td>
+                               </tr>`;
+                  tableBody.innerHTML += row;
+              });
+          })
+          .catch(error => console.error('Error:', error));
+  });
   </script>
 
   <style>
@@ -327,16 +325,17 @@ function showitems() {
       <div class="row">
         <div class="col-md-4">
           <h5>Company Name</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu fringilla bibendum, elit elit
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu fringilla bibendum, elit
+            elit
             consectetur ipsum, vel luctus sapien magna eu nulla.</p>
         </div>
         <div class="col-md-4">
           <h5>Quick Links</h5>
           <ul class="list-unstyled">
-            <li><a href="#" style="color: #d8363a;">Dashboard</a></li>
-            <li><a href="#" style="color: #d8363a;">About Us</a></li>
-            <li><a href="#" style="color: #d8363a;">Summary</a></li>
-            <li><a href="#" style="color: #d8363a;">Contact Us</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Summary</a></li>
+            <li><a href="#">Contact Us</a></li>
           </ul>
         </div>
         <div class="col-md-4">

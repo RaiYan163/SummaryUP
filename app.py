@@ -4,6 +4,7 @@ from flask import Flask, abort, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from dotenv import load_dotenv
+from flask_login import LoginManager
 
 import os
 load_dotenv()
@@ -14,18 +15,23 @@ app = Flask(__name__)
 
 database_uri = os.getenv("DATABASE_URI")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
 
-# SSL configuration in JSON format
-ssl_config = {
-    "ca": "/etc/ssl/cert.pem"
-}
+# # SSL configuration in JSON format
+# ssl_config = {
+#     "ca": "/etc/ssl/cert.pem"
+# }
+
+# Configure the database connection
+app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 
 # Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'connect_args': ssl_config}
+# app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'connect_args': ssl_config}
 
 # # Convert SSL configuration to a query string
 # ssl_query_string = "&".join([f"{key}={value}" for key, value in ssl_config["ssl"].items()])
@@ -40,6 +46,15 @@ db = SQLAlchemy(app)
 
 from models import*
 
+login_manager = LoginManager()
+login_manager.login_view = '/'
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
 
 
 
@@ -53,6 +68,8 @@ def login_is_required(function):
         else:
             return function(*args, **kwargs)  # Forward the arguments to the original function
     return wrapper
+
+
 
 
 

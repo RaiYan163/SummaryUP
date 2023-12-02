@@ -1,20 +1,19 @@
 from app import db
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
 
-######### User Model #############
 class User(UserMixin, db.Model):
+    __tablename__ = 'User'
     userID = db.Column(db.Integer, primary_key=True)
-    firstName = db.Column(db.String(255))
-    lastName = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True, index=True)
-    password= db.Column(db.String(255))
-    avatar = db.Column(db.String(255))
-    gender = db.Column(db.String(255))
-    age = db.Column(db.Integer)
+    firstName = db.Column(db.String(255), nullable=True)
+    lastName = db.Column(db.String(255), nullable=True)
+    email = db.Column(db.String(255), unique=True, nullable=True)
+    password = db.Column(db.String(255), nullable=True)
+    gender = db.Column(db.String(255), nullable=True)
+    age = db.Column(db.Integer, nullable=True)
 
-    summaries = db.relationship('Summary', backref='user', lazy=True)
-    saved_links = db.relationship('SavedLink', backref='user', lazy=True)
+    # Relationships
+    summaries = db.relationship('Summary', backref='user', lazy='dynamic')
+    saved_links = db.relationship('SavedLink', backref='user', lazy='dynamic')
 
     def set_password(self, password):
         self.password = password
@@ -26,22 +25,34 @@ class User(UserMixin, db.Model):
         return str(self.userID)
 
 class Summary(db.Model):
+    __tablename__ = 'Summary'
     summaryID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, db.ForeignKey('user.userID'))
-    urlLink = db.Column(db.String(255))
-    summaryTitle = db.Column(db.String(255))
-    rating = db.Column(db.Integer)
+    userID = db.Column(db.Integer, db.ForeignKey('User.userID'), nullable=True)
+    summaryTitle = db.Column(db.String(255), nullable=True)
+    rating = db.Column(db.Integer, nullable=True)
+    summaryBody = db.Column(db.String(255), nullable=True)
+    summaryLink = db.Column(db.String(255), nullable=True)
 
 class SavedLink(db.Model):
+    __tablename__ = 'SavedLink'
     linkID = db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, db.ForeignKey('user.userID'))
-    linkTitle = db.Column(db.String(255))
-    linkDescription = db.Column(db.String(255))
-    linkURL = db.Column(db.String(255))
-    linkCategory = db.Column(db.String(255))
+    userID = db.Column(db.Integer, db.ForeignKey('User.userID'), nullable=True)
+    linkTitle = db.Column(db.String(255), nullable=True)
+    linkDescription = db.Column(db.String(255), nullable=True)
+    linkURL = db.Column(db.String(255), nullable=True)
+    linkCategory = db.Column(db.String(255), nullable=True)
 
-class Admin(db.Model):
+class Admin(UserMixin, db.Model):
+    __tablename__ = 'Admin'
     adminID = db.Column(db.Integer, primary_key=True)
-    adminName = db.Column(db.String(255))
-    password = db.Column(db.String(255))
+    adminName = db.Column(db.String(255), nullable=True)
+    password = db.Column(db.String(255), nullable=True)
 
+    def set_password(self, password):
+        self.password = password
+
+    def check_password(self, password):
+        return self.password == password
+
+    def get_id(self):
+        return str(self.adminID)

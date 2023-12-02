@@ -37,14 +37,14 @@
     }
 
     .card-header {
-      background-color: #D9363B;
+      background-color: #fff;
       border-bottom: none;
     }
 
     .card-header button {
       background-color: transparent;
       border: none;
-      color: #fff;
+      color: #000;
       font-weight: bold;
       margin-right: 10px;
     }
@@ -65,7 +65,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
-<body>
+<body class="mb-1">
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -108,7 +108,7 @@
 
 
   <!-- Card -->
-  <div class="card mb-4">
+  <div class="card">
     <div class="card-header d-flex justify-content-center">
       <div class="btn-group" role="group" aria-label="Toggle content">
         <button type="button" class="btn btn-transparent" onclick="dashboard()">Dashboard</button>
@@ -119,105 +119,60 @@
     </div>
 
     <!-- Testing purpose only. Nothing is final-->
-    <!-- Dropdown JS -->
-    <script>
-      $(document).ready(function () {
-        $('.dropdown-menu a').on('click', function () {
-          var selectedOption = $(this).text();
-          $(this).closest('.dropdown').find('.dropdown-toggle').text(selectedOption);
-        });
-      });
-    </script>
+    <div class="card-body">
 
-    <!-- Dropdown Menu -->
-    <div class="container d-flex justify-content-center mb-5">
-      <div class="row">
-        <div class="col-6">
-          <div class="dropdown mr-5">
-            <button class="btn btn-secondary dropdown-toggle mr-5" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Choose any category
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Option 1</a>
-              <a class="dropdown-item" href="#">Option 2</a>
-              <a class="dropdown-item" href="#">Option 3</a>
-              <a class="dropdown-item" href="#">Option 4</a>
-            </div>
-          </div>
+      <h4 style="text-align: center;">Hello there,{{Name}}</h4>
+
+      <h5 style="margin-top: 40px; margin-bottom: 40px;">Save Links </h5>
+
+      <div>
+        <div class="form-group">
+          <div>Title</div>
+          <input type="text" class="form-control" id="title" placeholder="Enter title" disabled>
         </div>
-        <div class="col-6 ml-6">
-          <button type="button" class="btn btn-primary">Show</button>
+        <div class="form-group">
+          <div>Link</div>
+          <input type="text" class="form-control" id="link" placeholder="Enter link" disabled>
+        </div>
+        <div class="form-group">
+          <div>Transcript</div>
+          <textarea class="form-control" id="description" rows="5" disabled></textarea>
+        </div>
+        <div class="form-group">
+          <div>Summary</div>
+          <textarea class="form-control" id="summary" rows="4" disabled></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary mr-2" onclick="editContent()">Edit</button>
+          <!-- <button type="submit" class="btn btn-primary mr-2">Save</button> -->
+          <!-- <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button> -->
         </div>
       </div>
+      
+      <style>
+        /* CSS to style the disabled divs */
+        .form-group div {
+          font-weight: bold;
+          /* Other styles to visually distinguish the labels */
+        }
+        
+        /* CSS to style the disabled inputs and textareas */
+        input[type="text"],
+        textarea {
+          width: 100%;
+          padding: 0.375rem 0.75rem;
+          color: #495057;
+          background-color: #f8f9fa;
+          border: 1px solid #ced4da;
+          border-radius: 0.25rem;
+          pointer-events: none;
+          user-select: none;
+        }
+      </style>
+
+
     </div>
-
-    <!-- Table -->
-    <div style="overflow-x: auto;">
-      <table class="table mt-4">
-        <thead>
-          <tr>
-            <th scope="col">Serial Number</th>
-            <th scope="col">Date Added</th>
-            <th scope="col">Category</th>
-            <th scope="col" style="width: 40%;">Title</th> <!-- Increase the width here -->
-            <th scope="col" style="text-align: right;">Actions</th>
-            <!-- Hopewilly will make it responsive to the actions -->
-            <!-- Empty header for actions column aligned to the right -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>2022-01-01</td>
-            <td>Youtube</td>
-            <td>Sample Title 1</td>
-            <td>
-              <div class="d-flex justify-content-end"> <!-- Align actions to the right -->
-                <button type="button" class="btn btn-secondary" onclick="openContent()">Open</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>2022-01-02</td>
-            <td>Wikipedia</td>
-            <td>Sample Title 2</td>
-            <td>
-              <div class="d-flex justify-content-end"> <!-- Align actions to the right -->
-                <button type="button" class="btn btn-secondary" onclick="editContent()">Open</button>
-              </div>
-            </td>
-          </tr>
-          <!-- Add more rows as needed -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Pagination -->
-    <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
-
-
   </div>
-
 
 
 
@@ -238,9 +193,6 @@
     function dashboard() {
       window.location.href = "{{ url_for('dashboard')}}"
     }
-    function saved_summaries() {
-      window.location.href = "{{ url_for('dashboard')}}"
-    }
     function summary() {
       window.location.href = "{{ url_for('summary')}}"
     }
@@ -250,9 +202,8 @@
     function logout() {
       window.location.href = "{{ url_for('logout')}}"
     }
-
-    function openContent() {
-      window.location.href = "{{ url_for('open_items')}}"
+    function editContent() {
+      window.location.href = "{{ url_for('edit_items')}}";
     }
 
     $(document).ready(function () {
@@ -267,44 +218,33 @@
       }
     });
 
+    function confirmDelete() {
+      var result = confirm("Are you sure you want to delete?"); // Displays a confirmation dialog
+
+      if (result) {
+        console.log("Item deleted"); // If 'OK' is clicked in the confirmation dialog, log "Item deleted" to the console
+      }
+    }
 
     /*
      function showContent(contentId) {
       document.querySelectorAll('.card-body > div').forEach(div => {
         div.style.display = 'none';
       });
- 
+
       document.getElementById(contentId).style.display = 'block';
     }
- 
+
     */
 
   </script>
-
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .content {
-      flex: 1;
-    }
-  </style>
-
-
-  <div class="content">
-    <!-- To move the footer to his position -->
-  </div>
 
   <footer class="bg-light py-5 mt-5 d-flex">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
           <h5>Company Name</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu fringilla bibendum, elit
-            elit
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu fringilla bibendum, elit elit
             consectetur ipsum, vel luctus sapien magna eu nulla.</p>
         </div>
         <div class="col-md-4">
@@ -328,7 +268,6 @@
     </div>
   </footer>
 </body>
-
 
 
 
