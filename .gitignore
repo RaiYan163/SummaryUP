@@ -20,5 +20,7 @@ instance/
 
 # Dependencies
 venv/
-raiyanPC/
+system_32/
 summarize/
+raiyanPC/
+controller/dummy.py

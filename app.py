@@ -3,6 +3,7 @@ from functools import wraps
 from flask import Flask, abort, session
 
 
+
 app = Flask(__name__)
 
 
@@ -20,6 +21,8 @@ def login_is_required(function):
 
 
 from controller import * #Need to import after the app and login_is_required is initialized. -Saugata
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
