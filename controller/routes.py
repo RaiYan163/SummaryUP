@@ -176,6 +176,19 @@ def showSummary():
 
     return render_template('showSummary.html', summaries=summaries, current_page=page, total_pages=total_pages)
 
+@app.route('/showSummary/<int:summary_id>')
+@optional_login_required
+def showSummary(summary_id):
+    # Fetch the summary with the given summary_id
+    summary = Summary.query.get(summary_id)
+
+    # Check if the summary exists and belongs to the current user
+    if not summary or summary.userID != current_user.userID:
+        abort(404)  # Return a 404 error if the summary doesn't exist or doesn't belong to the user
+
+    return render_template('showSummary.html', summary=summary)
+
+
 
 @app.route('/showLinks')
 @optional_login_required
