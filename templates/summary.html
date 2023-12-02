@@ -391,7 +391,7 @@
         </div>
 
       </div>
-      <!-- For File -->
+      <!-- For File  -->
       <div class="my-div" id="file" style="display: none;">
 
         <div class="container-md">
@@ -450,7 +450,7 @@
 
       </div>
     </div>
-
+     
     <div class="container-fluid panel panel-blue" style="background-color: #D9363B;">
       Load the transcript from youtube.
     </div>
@@ -640,6 +640,33 @@
       console.log('Response received:', response);
     })
     }
+
+
+
+    // The button to go the save links page for youtube
+    function save_btn() {
+      
+      var x = document.getElementById('yt_url');
+      var y = document.getElementById('summary');
+
+      var entry = {
+        yt_url: x.value,
+        summary: y.value
+      }
+      console.log(entry)
+      window.location.href = "{{ url_for('yt_save')}}"
+      fetch('/yt_save', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+    
+  }
+
 
   </script>
 

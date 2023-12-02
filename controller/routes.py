@@ -128,6 +128,18 @@ def yt_summarize():
     else:
         return render_template('summary.html', summary_area="Not a POST request!!")
 
+@app.route('/yt_save', methods=['GET', 'POST'])
+def yt_save():
+    if req.method == 'POST':
+        requ = req.get_json()
+        url = requ.get('yt_url')
+        summary = requ.get('summary')
+        print(url)
+        print(summary)
+        return render_template('save_links.html', link = url, summary = summary)
+    else:
+        return render_template('save_links.html', summary_area="Not a POST request!!")
+
 
 @app.route('/txt_summarize', methods=['GET', 'POST'])
 def txt_summarize():
@@ -166,4 +178,5 @@ def wiki_transcript():
         transcript = wiki_trans(url)
         return jsonify({"transcript": transcript}),200
     else:
+        print("Not a POST request!!")
         return render_template('summary.html', summary_area="Not a POST request!!")
