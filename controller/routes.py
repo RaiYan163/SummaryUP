@@ -1,3 +1,4 @@
+import concurrent.futures
 from app import app, login_is_required
 from flask import render_template, redirect, session, jsonify, url_for, make_response
 from flask import request as req
@@ -105,16 +106,23 @@ def yt_summarize():
     if req.method == 'POST':
         requ = req.get_json()
         url = requ.get('yt_url')
+        size = int(requ.get('size'))
+        print(size)
+        print(url)
         text = transcript(url)['transcript']
         chunks = chunking(text)
         output = ""
-        for i, _ in enumerate(chunks):
+        for i,_ in enumerate(chunks):
+            #punctuated = punctuation(chunk)
             temp_out = pegasus(chunks[i])
-            output += temp_out
-        summary = pegasus(output)
-        return jsonify({"summary": summary}),200
+            output += temp_out 
+            print("------------------")
+        print("done")
+        summary = pegasus(output, size + 15, size - 15)
+        return jsonify({"summary": summary}), 200
     else:
         return render_template('summary.html', summary_area="Not a POST request!!")
+
 
 @app.route('/txt_summarize', methods=['GET', 'POST'])
 def txt_summarize():

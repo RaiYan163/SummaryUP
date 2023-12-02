@@ -12,7 +12,7 @@ def punctuation(text):
         "inputs": text,
     })
 
-    punctuated_sentences = ""
+    punctuated_sentences = ""  # Initialize punctuated_sentence
 
     def capital(word, cap):
         if cap == 'U':
@@ -25,7 +25,6 @@ def punctuation(text):
             return ' '
         else:
             return sign + ' '
-
     for item in output:
         word = item['word']
         entity = item['entity_group']
@@ -33,8 +32,9 @@ def punctuation(text):
             capital_letter = entity[0]
             punctuation = entity[-1]
         else:
-            punctuated_sentence += item['word']
+            punctuated_sentences += item['word']
+            continue  
         capitalized_word = capital(word, capital_letter)
-        punctuated_sentence += capitalized_word + punc_func(punctuation)
+        punctuated_sentences += capitalized_word + punc_func(punctuation)
 
-    return punctuated_sentence
+    return punctuated_sentences

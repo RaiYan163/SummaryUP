@@ -276,7 +276,7 @@
           </div>
           <div class="flex self-center" id="youtubetranscriptBottom">
             <label for="size">length</label>
-            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+            <input type="range" id="size_yt" class="m-2" min="20" max="1000" name="maxL">
             <button type="button" class="btn btn-primary btn custom-btn-color" onclick="summarize_btn();">Summarize</button>
           </div>
           <div class="flex self-center" id="youtubesummaryBottom">
@@ -317,7 +317,7 @@
 
           <div class="flex self-center" id="texttranscriptBottom">
             <label for="size">length</label>
-            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+            <input type="range" id="size_txt" class="m-2" min="20" max="1000" name="maxL">
             <button type="summarize" class="btn btn-primary" onclick = "txtsummary_btn();">Summarize</button>
           </div>
 
@@ -379,7 +379,7 @@
 
           <div class="flex self-center" id="sitetranscriptBottom">
             <label for="size">length</label>
-            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
+            <input type="range" id="size_wiki" class="m-2" min="20" max="1000" name="maxL">
             <button type="button" class="btn btn-primary" onclick="wikisum();">Summarize</button>
           </div>
 
@@ -511,8 +511,10 @@
 
     function summarize_btn(){
       var x = document.getElementById('yt_url');
+      var y = document.getElementById('size_yt');
       var entry = {
-        yt_url: x.value
+        yt_url: x.value,
+        size: y.value
       }
 
       console.log(entry);
