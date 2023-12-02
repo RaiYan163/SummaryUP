@@ -110,15 +110,20 @@ def yt_summarize():
         print(size)
         print(url)
         text = transcript(url)['transcript']
+        print(len(text))
         chunks = chunking(text)
         output = ""
-        for i,_ in enumerate(chunks):
+        for i, _ in enumerate(chunks):
             #punctuated = punctuation(chunk)
             temp_out = pegasus(chunks[i])
             output += temp_out 
+            if(len(output)>900):
+                output: pegasus(output, size + 15, size - 15)
             print("------------------")
         print("done")
         summary = pegasus(output, size + 15, size - 15)
+        summary = summary.replace('<n>', ' ')
+        summary = summary.replace(' .', '.')
         return jsonify({"summary": summary}), 200
     else:
         return render_template('summary.html', summary_area="Not a POST request!!")

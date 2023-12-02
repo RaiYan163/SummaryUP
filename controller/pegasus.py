@@ -2,10 +2,12 @@ import requests
 
 def pegasus(text, max_length=None, min_length=None):
     if max_length is None:
-        max_length = len(text) - 5
+        max_length = 100
     
     if min_length is None:
-        min_length = int(len(text) / 2)
+        min_length = 50
+    print(len(text))
+    print("------------------")
 
     API_URL = "https://api-inference.huggingface.co/models/google/pegasus-cnn_dailymail"
     headers = {"Authorization": "Bearer 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"}
@@ -17,7 +19,7 @@ def pegasus(text, max_length=None, min_length=None):
         
     output = query({
         "inputs": text,
-        "parameters": {'max_length': max_length, 'min_length': min_length}
+        
     })
     print(output)
 
