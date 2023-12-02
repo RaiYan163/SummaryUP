@@ -11,7 +11,6 @@ load_dotenv()
 
 
 
-
 app = Flask(__name__)
 
 database_uri = os.getenv("DATABASE_URI")
@@ -69,10 +68,6 @@ def login_is_required(function):
         else:
             return function(*args, **kwargs)  # Forward the arguments to the original function
     return wrapper
-
-
-
-
 
 
 from controller import * #Need to import after the app and login_is_required is initialized. -Saugata
