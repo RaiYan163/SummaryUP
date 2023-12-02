@@ -1,5 +1,5 @@
 from app import app, login_is_required, db
-from flask import render_template, redirect, request, flash, url_for, session, abort
+from flask import render_template, redirect, request, flash, url_for, session, abort, make_response,jsonify
 from controller import google_auth
 from flask_login import login_user, logout_user, current_user, login_required, LoginManager
 from models import User, Summary, SavedLink, Admin
@@ -98,6 +98,7 @@ def signUp():
 def logout():
     logout_user()
     return redirect("/")
+
 
 
 
@@ -216,3 +217,15 @@ def showLinks():
 def protected_area():
     return "<a href = '/logout'>Logout</a> <br> <h4> Hello, your email is {} and <br> your name is {}.<\h4>".format(session['email'], session['name']) #This is just a test. You can delete or use this. -Saugata
 #The protected area is not done yet. I will do it later. Let me know the info from the gmail. -Saugata
+
+
+#For the Input and Ouput in the html general.
+
+
+
+
+
+
+
+
+    

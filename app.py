@@ -11,6 +11,7 @@ load_dotenv()
 
 
 
+
 app = Flask(__name__)
 
 database_uri = os.getenv("DATABASE_URI")
@@ -75,6 +76,8 @@ def login_is_required(function):
 
 
 from controller import * #Need to import after the app and login_is_required is initialized. -Saugata
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
