@@ -10,3 +10,4 @@ def chunking(text):
   )
   chunks = rec_text_splitter.split_text(text)
   return chunks
+

@@ -293,6 +293,50 @@ def link_edit():
     # Render the linkEdit template, passing the YouTube URL if available
     return render_template('linkEdit.html', yt_url=yt_url)
 
+# @app.route('/summaryEdit', methods=['GET', 'POST'])
+# @optional_login_required
+# def summary_edit():
+#     if request.method == 'POST':
+#         summary_title = request.form.get('summaryTitle')
+#         summary_link = request.form.get('summaryURL')
+#         summary_body = request.form.get('body')
+#         rating = request.form.get('rating')  # Retrieve the rating from the form
+
+#         # Convert rating to integer, default to None if conversion fails
+#         try:
+#             rating = int(rating)
+#         except ValueError:
+#             rating = None
+
+#         # Create a new Summary instance
+#         new_summary = Summary(
+#             userID=current_user.userID,
+#             summaryTitle=summary_title,
+#             summaryLink=summary_link,
+#             summaryBody=summary_body,
+#             rating=rating  # Save the integer rating
+#         )
+
+#         # Add the new summary to the session and commit to the database
+#         db.session.add(new_summary)
+#         db.session.commit()
+
+#         # Flash a success message
+#         flash('Summary saved successfully!', category='success')
+        
+#         # Redirect to a relevant page, such as the dashboard or summary list
+#         return redirect(url_for('dashboard'))
+    
+#     else:
+#             # For a GET request, retrieve the query parameters
+#             summary_link = request.args.get('summaryURL', '')
+#             summary_body = request.args.get('body', '')
+
+#             # Render the template with the pre-filled data
+#             return render_template('summaryEdit.html', 
+#                                summary_link=summary_link, 
+#                                summary_body=summary_body)
+
 @app.route('/summaryEdit', methods=['GET', 'POST'])
 @optional_login_required
 def summary_edit():
@@ -304,38 +348,35 @@ def summary_edit():
 
         # Convert rating to integer, default to None if conversion fails
         try:
-            rating = int(rating)
+            rating = int(rating) if rating else None
         except ValueError:
             rating = None
 
         # Create a new Summary instance
         new_summary = Summary(
-            userID=current_user.userID,
+            userID=current_user.userID if current_user.is_authenticated else None,
             summaryTitle=summary_title,
             summaryLink=summary_link,
             summaryBody=summary_body,
-            rating=rating  # Save the integer rating
+            rating=rating
         )
 
         # Add the new summary to the session and commit to the database
-        db.session.add(new_summary)
-        db.session.commit()
-
-        # Flash a success message
-        flash('Summary saved successfully!', category='success')
+        try:
+            db.session.add(new_summary)
+            db.session.commit()
+            flash('Summary saved successfully!', category='success')
+        except Exception as e:
+            print("Error: ", e)
+            flash('An error occurred while saving the summary.', category='error')
         
-        # Redirect to a relevant page, such as the dashboard or summary list
         return redirect(url_for('dashboard'))
     
     else:
-            # For a GET request, retrieve the query parameters
-            summary_link = request.args.get('summaryURL', '')
-            summary_body = request.args.get('body', '')
+        summary_link = request.args.get('summaryURL', '')
+        summary_body = request.args.get('body', '')
+        return render_template('summaryEdit.html', summary_link=summary_link, summary_body=summary_body)
 
-            # Render the template with the pre-filled data
-            return render_template('summaryEdit.html', 
-                               summary_link=summary_link, 
-                               summary_body=summary_body)
 
    
     

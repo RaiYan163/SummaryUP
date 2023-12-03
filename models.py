@@ -30,7 +30,7 @@ class Summary(db.Model):
     userID = db.Column(db.Integer, db.ForeignKey('User.userID'), nullable=True)
     summaryTitle = db.Column(db.String(255), nullable=True)
     rating = db.Column(db.Integer, nullable=True)
-    summaryBody = db.Column(db.String(255), nullable=True)
+    summaryBody = db.Column(db.Text, nullable=True) 
     summaryLink = db.Column(db.String(255), nullable=True)
 
 class SavedLink(db.Model):

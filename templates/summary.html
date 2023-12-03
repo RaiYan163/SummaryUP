@@ -366,13 +366,13 @@
 
         <div class="container-md">
           <div class="form-group green-border-focus" id="sitetranscriptSection">
-            <label for="exampleFormControlTextarea5">Transcript</label>
-            <textarea class="form-control" id="sitetranscripttextarea" rows="20"></textarea>
+            <label for="exampleFormControlTextarea4">Transcript</label>
+            <textarea class="form-control" id="exampleFormControlTextarea4" rows="20"></textarea>
           </div>
 
           <div class="form-group green-border-focus" id="sitesummarySection">
             <label for="exampleFormControlTextarea5">Summary</label>
-            <textarea class="form-control" id="sitesummaryTextarea" rows="20"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
           </div>
 
 
@@ -632,7 +632,7 @@
       }
       response.json().then(data => {
         console.log(data);
-        document.getElementById('exampleFormControlTextarea5').value = data.transcript;
+        document.getElementById('exampleFormControlTextarea4').value = data.transcript;
       });
       console.log('Response received:', response);
     })
@@ -640,7 +640,7 @@
 
     function wikisumsave() {
     var wikiLink = document.getElementById('wikilink').value;
-    var siteSummary = document.getElementById('sitetranscripttextarea').value;
+    var siteSummary = document.getElementById('exampleFormControlTextarea5').value;
 
     // Construct the URL with query parameters
     var summaryEditUrl = "/summaryEdit?summaryURL=" + encodeURIComponent(wikiLink) + 
