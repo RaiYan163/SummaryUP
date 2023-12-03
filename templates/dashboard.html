@@ -147,6 +147,16 @@
         <button type="button" class="btn btn-transparent" onclick="logout()">Logout</button>
       </div>
     </div>
+    
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+  {% if messages %}
+    <div class="alert alert-success">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
     <!-- Testing purpose only. Nothing is final-->
 
@@ -178,6 +188,8 @@
         </div>
       </div>
     </section>
+
+    
     <!-- End of Greeting Card -->
 
     <!-- Rest of the code -->
@@ -188,7 +200,7 @@
         <div class="col-md-6" style="padding-right: 5px;">
           <div class="card text-center custom-summary-card" onclick="toggleCardSelection(this, 'summaries')" data-card-type="summaries">
             <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
-              <h1 class="card-title">23</h1>
+              <h1 class="card-title">{{ summaries_count }}</h1>
               <h5 class="card-text">Saved Summaries</h5>
             </div>
           </div>
@@ -196,7 +208,7 @@
         <div class="col-md-6" style="padding-left: 5px;">
           <div class="card text-center custom-links-card" onclick="toggleCardSelection(this, 'links')" data-card-type="links">
             <div class="card-body d-flex flex-column justify-content-center" style="height: 200px;">
-              <h1 class="card-title">11</h1>
+              <h1 class="card-title">{{ links_count }}</h1>
               <h5 class="card-text">Saved Links</h5>
             </div>
           </div>
@@ -257,6 +269,9 @@
       window.location.href = "{{ url_for('showLinks')}}"
     }
 
+   
+
+
     $(document).ready(function () {
       var maxCardsToShow = 3; // Change this value to set the maximum number of cards
 
@@ -282,6 +297,21 @@
     */
 
   </script>
+
+<script>
+  // Wait for the DOM to be loaded
+  window.onload = function() {
+      // Check if the flash message element exists
+      var flashMessage = document.querySelector('.alert-success');
+      if (flashMessage) {
+          // Set a timeout to remove the flash message after 3 seconds
+          setTimeout(function() {
+              flashMessage.style.display = 'none';
+          }, 3000);
+      }
+  };
+</script>
+
   <script>
     var selectedCard = null;
 

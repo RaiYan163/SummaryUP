@@ -232,7 +232,6 @@
           <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumYt">Youtube</button>
           <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumText">Text</button>
           <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumSite">Site</button>
-          <button type="button" class="btn custom-btn-color rounded-pill mr-2" id="sumFile">File</button>
         </div>
       </div>
 
@@ -346,8 +345,8 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <button type="button" class="btn btn-primary" onclick="wikisave();">Save</button>
-                <button type="button" class="btn btn-primary" onclick="wikitranscript();">Transcript</button>
+                <button type="button" class="btn btn-primary custom-btn-color" onclick="wiki_btn();">Save</button>
+                <button type="button" class="btn btn-primary custom-btn-color" onclick="wikitranscript();">Transcript</button>
               </div>
             </div>
           </form>
@@ -368,12 +367,12 @@
         <div class="container-md">
           <div class="form-group green-border-focus" id="sitetranscriptSection">
             <label for="exampleFormControlTextarea5">Transcript</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            <textarea class="form-control" id="sitetranscripttextarea" rows="20"></textarea>
           </div>
 
           <div class="form-group green-border-focus" id="sitesummarySection">
             <label for="exampleFormControlTextarea5">Summary</label>
-            <textarea class="form-control" id="exampleFormControlTextarea5" rows="20"></textarea>
+            <textarea class="form-control" id="sitesummaryTextarea" rows="20"></textarea>
           </div>
 
 
@@ -436,8 +435,6 @@
 
 
           <div class="flex self-center" id="filetranscriptBottom">
-            <label for="size">length</label>
-            <input type="range" id="size" class="m-2" min="20" max="1000" name="maxL">
             <button type="summarize" class="btn btn-primary">Summarize</button>
           </div>
 
@@ -641,31 +638,67 @@
     })
     }
 
+    function wikisumsave() {
+    var wikiLink = document.getElementById('wikilink').value;
+    var siteSummary = document.getElementById('sitetranscripttextarea').value;
+
+    // Construct the URL with query parameters
+    var summaryEditUrl = "/summaryEdit?summaryURL=" + encodeURIComponent(wikiLink) + 
+                         "&body=" + encodeURIComponent(siteSummary);
+
+    // Redirect to the summaryEdit page
+    window.location.href = summaryEditUrl;
+}
+
 
 
     // The button to go the save links page for youtube
-    function save_btn() {
+  //   function save_btn() {
       
-      var x = document.getElementById('yt_url');
-      var y = document.getElementById('summary');
+  //     var x = document.getElementById('yt_url');
+  //     var y = document.getElementById('summary');
 
-      var entry = {
-        yt_url: x.value,
-        summary: y.value
-      }
-      console.log(entry)
-      window.location.href = "{{ url_for('yt_save')}}"
-      fetch('/yt_save', {
-      method: 'POST',
-      credentials: "include",
-      body: JSON.stringify(entry),
-      cache: "no-cache",
-      headers: new Headers({
-        "content-type": "application/json"
-      })
-    })
+  //     var entry = {
+  //       yt_url: x.value,
+  //       summary: y.value
+  //     }
+  //     console.log(entry)
+  //     window.location.href = "{{ url_for('yt_save')}}"
+  //     fetch('/yt_save', {
+  //     method: 'POST',
+  //     credentials: "include",
+  //     body: JSON.stringify(entry),
+  //     cache: "no-cache",
+  //     headers: new Headers({
+  //       "content-type": "application/json"
+  //     })
+  //   })
     
+  // }
+
+  function save_btn() {
+  var ytUrl = document.getElementById('yt_url').value;
+
+  if (!ytUrl) {
+    alert('Please enter a YouTube URL');
+    return;
   }
+
+  // Redirect to the linkEdit page with the YouTube URL as a query parameter
+  window.location.href = `/linkEdit?yt_url=${encodeURIComponent(ytUrl)}`;
+}
+
+function wiki_btn() {
+  var wikiUrl = document.getElementById('wikilink').value;
+
+  if (!wikiUrl) {
+    alert('Please enter a Wikipedia URL');
+    return;
+  }
+
+  // Redirect to the linkEdit page with the Wikipedia URL as a query parameter
+  window.location.href = `/linkEdit?wiki_url=${encodeURIComponent(wikiUrl)}`;
+}
 
 
   </script>

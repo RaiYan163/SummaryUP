@@ -1,7 +1,3 @@
-<!-- FILEPATH: /d:/SystemProject/SummaryUP/templates/checking.html -->
-<!-- Created by Saugata Roy Arghya-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,28 +32,56 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
     }
 
+    .custom-summary-card {
+  background-color: #FFA500 !important; /* Orange color with !important to ensure override */
+  color: black; /* Assuming you want white text on a colored background */
+}
+
+.custom-links-card {
+  background-color: #FF4500 !important; /* Red color with !important to ensure override */
+  color: black;
+}
+
     .card-header {
-      background-color: #fff;
+      background-color: #d8363a;
       border-bottom: none;
     }
 
     .card-header button {
       background-color: transparent;
       border: none;
-      color: #000;
+      color: #fff;
       font-weight: bold;
       margin-right: 10px;
     }
 
     .card-header button:focus {
       outline: none;
-      color: #fff;
-      background-color: #007bff;
+      color: #d8363a;
+      background-color: white;
     }
 
     .card-body {
       background-color: #f8f9fa;
     }
+
+    .custom-button {
+      background-color: #d8363a;
+      color: white;
+ 
+    }
+
+    .selected-card {
+    background-color: white; /* Change to your desired color */
+    color: #d8363a; /* Change to your desired text color */
+    border: 2px solid red3; /* Change to your desired border style */
+    }
+
+  selected-card {
+  background-color: #007bff; /* Change to your desired color */
+  color: #fff; /* Change to your desired text color */
+  border: 2px solid #0056b3; /* Change to your desired border style */
+}
   </style>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -121,32 +145,40 @@
     <!-- Testing purpose only. Nothing is final-->
     <div class="card-body">
 
-      <h4 style="text-align: center;">Hello there,{{Name}}</h4>
+      <h4 style="text-align: center;">Hello there,{{current_user.firstName}}</h4>
 
       <h5 style="margin-top: 40px; margin-bottom: 40px;">Save Links </h5>
 
-      <form>
+      <form method="POST" action="/linkEdit">
         <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" class="form-control" id="title" placeholder="Enter title">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="linkTitle" placeholder="Enter title">
+        </div>
+        
+        <!-- Note: The category selection needs to be changed to a select or input field with a name attribute -->
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category">
+                <option value="YouTube">YouTube</option>
+                <option value="WikiPedia">WikiPedia</option>
+                <!-- Add other categories as needed -->
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="link">Link Url</label>
+            <input type="text" class="form-control" id="link" name="linkURL" placeholder="Enter link">
         </div>
         <div class="form-group">
-          <label for="link">Link</label>
-          <input type="text" class="form-control" id="link" placeholder="Enter link">
+            <label for="description">Link Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
         </div>
-        <div class="form-group">
-          <label for="Transcript">Transcript</label>
-          <textarea class="form-control" id="description" rows="5"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="Summary">Summary</label>
-          <textarea class="form-control" id="description" rows="4"></textarea>
-        </div>
+    
         <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary mr-2">Save</button>
-          <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+            <button type="submit" class="btn custom-button">Save</button>
         </div>
-      </form>
+    </form>
+    
 
 
 
