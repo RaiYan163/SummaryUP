@@ -270,7 +270,7 @@
             <textarea class="form-control" id="transcript" rows="20">{{transcript_area}}</textarea>
           </div>
           <div class="form-group green-border-focus" id="youtubesummarySection">
-            <label for="exampleFormControlTextarea5">Summary</label>
+            <label for="summary">Summary</label>
             <textarea class="form-control" id="summary" rows="20">{{summary_area}}</textarea>
           </div>
           <div class="flex self-center" id="youtubetranscriptBottom">
@@ -323,7 +323,7 @@
           <div class="flex self-center" id="textsummaryBottom">
 
             <button type="summarize" class="btn btn-primary" onclick = "txtsummary_btn();">Re-Summarize</button>
-            <button type="save" class="btn btn-primary" onclick = "txtsummary_save();">Save</button>
+            <!-- <button type="save" class="btn btn-primary" onclick = "txtsummary_save();">Save</button> -->
           </div>
         </div>
       </div>
@@ -650,6 +650,18 @@
     window.location.href = summaryEditUrl;
 }
 
+function summarysave_btn() {
+    var ytLink = document.getElementById('yt_url').value;
+    var ytSummary = document.getElementById('summary').value;
+
+    // Construct the URL with query parameters
+    var summaryEditUrl = "/summaryEdit?summaryURL=" + encodeURIComponent(ytLink) + 
+                         "&body=" + encodeURIComponent(ytSummary);
+
+    // Redirect to the summaryEdit page
+    window.location.href = summaryEditUrl;
+}
+
 
 
     // The button to go the save links page for youtube
@@ -677,27 +689,36 @@
   // }
 
   function save_btn() {
-  var ytUrl = document.getElementById('yt_url').value;
+    var ytUrl = document.getElementById('yt_url').value;
 
-  if (!ytUrl) {
-    alert('Please enter a YouTube URL');
-    return;
-  }
+    if (!ytUrl) {
+        alert('Please enter a YouTube URL');
+        return;
+    }
 
-  // Redirect to the linkEdit page with the YouTube URL as a query parameter
-  window.location.href = `/linkEdit?yt_url=${encodeURIComponent(ytUrl)}`;
+    var linkEditUrl = `/linkEdit?yt_url=${encodeURIComponent(ytUrl)}`;
+    console.log("Redirecting to: ", linkEditUrl);  // Debugging line
+
+    // Redirect to the linkEdit page with the YouTube URL as a query parameter
+    window.location.href = linkEditUrl;
 }
 
+
+
+
 function wiki_btn() {
-  var wikiUrl = document.getElementById('wikilink').value;
+    var wikiUrl = document.getElementById('wikilink').value;
 
-  if (!wikiUrl) {
-    alert('Please enter a Wikipedia URL');
-    return;
-  }
+    if (!wikiUrl) {
+        alert('Please enter a WikiPedia URL');
+        return;
+    }
 
-  // Redirect to the linkEdit page with the Wikipedia URL as a query parameter
-  window.location.href = `/linkEdit?wiki_url=${encodeURIComponent(wikiUrl)}`;
+    var linkEditUrl = `/linkEdit?yt_url=${encodeURIComponent(wikiUrl)}`;
+    console.log("Redirecting to: ", linkEditUrl);  //
+
+    
+    window.location.href = linkEditUrl;
 }
 
 
