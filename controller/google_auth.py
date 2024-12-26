@@ -22,7 +22,7 @@ def get_client_id():
     
 GOOGLE_CLIENT_ID = get_client_id()
 
-#GOOGLE_CLIENT_ID = "662083614675-hj166l9f1hr0m7bd2ktsbt534q7g0he0.apps.googleusercontent.com"
+
 
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" #This is for bypassing HTTPS. Contact with me in case of deployment. -Saugata
